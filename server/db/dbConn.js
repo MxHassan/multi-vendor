@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const { default: mongoose } = require('mongoose')
 
 if (process.env.NODE_ENV !== 'PRODUCTION') {
   require('dotenv').config({

@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose')
+const { default: mongoose, Schema } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
@@ -61,7 +61,7 @@ const userSchema = new Schema(
     resetPasswordToken: String,
     resetPasswordTime: Date
   },
-  { timestamps }
+  { timestamps: true }
 )
 // Hash Password
 userSchema.pre('save', async function save(next) {
@@ -82,5 +82,5 @@ userSchema.pre('save', async function save(next) {
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password)
 }
-
-module.exports = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema)
+module.exports = User

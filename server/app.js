@@ -23,8 +23,14 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
   })
 }
 
+// uploads file
+app.use('/', express.static(path.join(__dirname, 'temp')))
+// import routes
+const userRoutes = require('./routes/userRoutes')
+
 // routes
 app.use('/', require('./routes/root'))
+app.use('/api/user', userRoutes)
 app.all('*', (req, res) => {
   res.status(404)
   if (req.accepts('html')) {

@@ -1,7 +1,7 @@
 const app = require('./app')
 const PORT = process.env.PORT || 3500
 const { logEvents } = require('./middleware/logger')
-const mongoose = require('mongoose')
+const { default: mongoose } = require('mongoose')
 const connectDB = require('./db/dbConn')
 
 // Handling uncaught Exception
