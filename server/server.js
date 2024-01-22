@@ -4,12 +4,6 @@ const { logEvents } = require('./middleware/logger')
 const { default: mongoose } = require('mongoose')
 const connectDB = require('./db/dbConn')
 
-// Handling uncaught Exception
-process.on('uncaughtException', (err) => {
-  console.log(`Error: ${err.message}`)
-  console.log('Shutting down the server for handling uncaught exception')
-})
-
 if (process.env.NODE_ENV !== 'PRODUCTION') {
   require('dotenv').config({
     path: 'config/.env'
@@ -25,6 +19,15 @@ mongoose.connection.once('open', () => {
   const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
   })
+  // Handling uncaught Exception
+  process.on('uncaughtException', (err) => {
+    console.log(`Error: ${err.message}`)
+    console.log('Shutting down the server for handling uncaught exception')
+    server.close(() => {
+      process.exit(1)
+    })
+  })
+
   // unhandled promise rejection
   process.on('uncaughtException', (err) => {
     console.log(`Error: ${err.message}`)

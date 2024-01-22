@@ -2,17 +2,43 @@ import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RxAvatar } from 'react-icons/rx';
 import { useState } from 'react';
+import { BASE_URL } from '../../constants';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [visible, setVisible] = useState(false);
+  const [visiblePassword, setVisiblePassword] = useState(false);
+  const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
   const [avatar, setAvatar] = useState(null);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('submitted');
+    let formData = new FormData();
+    formData.append('fullName', fullName);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('confirmPassword', confirmPassword);
+    formData.append('file', avatar);
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+    axios
+      .post(`${BASE_URL}/user/create-user`, formData, config)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data.newUser);
+          toast.success(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.message);
+      });
   };
   return (
     <div className="min-h-screen bg-gray-50 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -21,7 +47,7 @@ const SignUp = () => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form noValidate onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
                 Full Name
@@ -61,17 +87,21 @@ const SignUp = () => {
               <div className="mt-1 relative">
                 <input
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  type={visible ? 'text' : 'password'}
+                  type={visiblePassword ? 'text' : 'password'}
                   name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   required
                 />
-                {visible ? (
-                  <AiOutlineEye className="absolute right-2 top-2 cursor-pointer" size={25} onClick={() => setVisible(false)} />
+                {visiblePassword ? (
+                  <AiOutlineEye className="absolute right-2 top-2 cursor-pointer" size={25} onClick={() => setVisiblePassword(false)} />
                 ) : (
-                  <AiOutlineEyeInvisible className="absolute right-2 top-2 cursor-pointer" size={25} onClick={() => setVisible(true)} />
+                  <AiOutlineEyeInvisible
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisiblePassword(true)}
+                  />
                 )}
               </div>
             </div>
@@ -82,17 +112,25 @@ const SignUp = () => {
               <div className="mt-1 relative">
                 <input
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  type={visible ? 'text' : 'password'}
+                  type={visibleConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   autoComplete="current-password"
                   required
                 />
-                {visible ? (
-                  <AiOutlineEye className="absolute right-2 top-2 cursor-pointer" size={25} onClick={() => setVisible(false)} />
+                {visibleConfirmPassword ? (
+                  <AiOutlineEye
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisibleConfirmPassword(false)}
+                  />
                 ) : (
-                  <AiOutlineEyeInvisible className="absolute right-2 top-2 cursor-pointer" size={25} onClick={() => setVisible(true)} />
+                  <AiOutlineEyeInvisible
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisibleConfirmPassword(true)}
+                  />
                 )}
               </div>
             </div>

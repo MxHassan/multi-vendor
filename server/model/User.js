@@ -1,11 +1,11 @@
 const { default: mongoose, Schema } = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-require('dotenv').config()
+const SALT_WORK_FACTOR = 10
 
 const userSchema = new Schema(
   {
-    name: {
+    fullName: {
       type: String,
       required: [true, 'Please enter your name!']
     },
@@ -49,15 +49,19 @@ const userSchema = new Schema(
       default: 'user'
     },
     avatar: {
-      public_id: {
-        type: String,
-        required: true
-      },
-      url: {
-        type: String,
-        required: true
-      }
+      type: String,
+      required: true
     },
+    // avatar: {
+    //   public_id: {
+    //     type: String,
+    //     required: true
+    //   },
+    //   url: {
+    //     type: String,
+    //     required: true
+    //   }
+    // },
     resetPasswordToken: String,
     resetPasswordTime: Date
   },
@@ -67,7 +71,7 @@ const userSchema = new Schema(
 userSchema.pre('save', async function save(next) {
   if (!this.isModified('password')) return next()
   try {
-    const salt = await bcrypt.genSalt(process.env.SALT_WORK_FACTOR)
+    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR)
     this.password = await bcrypt.hash(this.password, salt)
     return next()
   } catch (err) {

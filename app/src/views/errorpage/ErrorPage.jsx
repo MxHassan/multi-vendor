@@ -1,5 +1,4 @@
 import { useRouteError, useNavigate } from 'react-router-dom';
-// import { Button, Typography, Grid } from '@mui/material';
 
 export default function ErrorPage() {
   // const PF = process.env.REACT_APP_PUBLIC_FOLDER;

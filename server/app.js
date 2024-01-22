@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
-const ErrorHandler = require('./utils/ErrorHandler')
+// const ErrorHandler = require('./utils/ErrorHandler')
 
 // middleware
 app.use(logger)
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 }
 
 // uploads file
-app.use('/', express.static(path.join(__dirname, 'temp')))
+app.use('/resources', express.static(path.join(__dirname, 'uploads')))
 // import routes
 const userRoutes = require('./routes/userRoutes')
 
@@ -43,6 +43,6 @@ app.all('*', (req, res) => {
 })
 
 app.use(errorHandling)
-app.use(ErrorHandler)
+// app.use(ErrorHandler)
 
 module.exports = app
