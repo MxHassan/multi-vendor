@@ -15,14 +15,14 @@ const router = createBrowserRouter(
     <Route errorElement={<ErrorPage />}>
       <Route element={<PublicRouter />}>
         <Route element={<MinimalLayout />}>
-          <Route index element={<Public />} />
+          <Route path="/welcome" element={<Public />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Route>
       </Route>
       <Route element={<ProtectedRouter />}>
         <Route element={<MainLayout />}>
-          <Route path="/home" element={<Home />} />
+          <Route index  element={<Home />} />
         </Route>
       </Route>
     </Route>
