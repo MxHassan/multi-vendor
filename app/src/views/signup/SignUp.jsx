@@ -7,7 +7,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState('');
+  // const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,7 +19,8 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append('fullName', fullName);
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
     formData.append('email', email);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
@@ -28,11 +31,14 @@ const SignUp = () => {
       }
     };
     axios
-      .post(`${BASE_URL}/user/create-user`, formData, config)
+      .post(`${BASE_URL}/users/create-user`, formData, config)
       .then((res) => {
-        if (res.status === 200) {
-          console.log(res.data.newUser);
+        if (res.data.success === true) {
+          // console.log(res.data.message);
           toast.success(res.data.message);
+          // setTimeout(() => {
+          //   navigate('/');
+          // }, 1000);
         }
       })
       .catch((err) => {
@@ -46,22 +52,40 @@ const SignUp = () => {
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign Up a new account</h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white p-8 shadow sm:rounded-lg sm:px-10">
           <form noValidate onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-                Full Name
-              </label>
-              <div className="mt-1">
-                <input
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  type="text"
-                  name="fullName"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  autoComplete="name"
-                  required
-                />
+            <div className="flex justify-between">
+              <div className="max-sm:mr-5 mr-3">
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                  First Name
+                </label>
+                <div className="mt-1">
+                  <input
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    type="text"
+                    name="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="max-sm:ml-5 ml-3">
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                  Last Name
+                </label>
+                <div className="mt-1">
+                  <input
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    type="text"
+                    name="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    autoComplete="name"
+                    required
+                  />
+                </div>
               </div>
             </div>
             <div>
@@ -139,7 +163,7 @@ const SignUp = () => {
               <div className="mt-2 flex items-center">
                 <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
                   {avatar ? (
-                    <img src={URL.createObjectURL(avatar)} alt="profile picture" className="h-full w-full object-cover rounded-full"></img>
+                    <img src={URL.createObjectURL(avatar)} alt="profile picture" className="h-full w-full object-cover rounded-full" />
                   ) : (
                     <RxAvatar className="h-8 w-8" />
                   )}

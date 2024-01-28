@@ -25,12 +25,11 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 
 // uploads file
 app.use('/resources', express.static(path.join(__dirname, 'uploads')))
-// import routes
-const userRoutes = require('./routes/userRoutes')
 
 // routes
 app.use('/', require('./routes/root'))
-app.use('/api/user', userRoutes)
+app.use('/api/auth', require('./routes/authRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 app.all('*', (req, res) => {
   res.status(404)
   if (req.accepts('html')) {
@@ -43,6 +42,5 @@ app.all('*', (req, res) => {
 })
 
 app.use(errorHandling)
-// app.use(ErrorHandler)
 
 module.exports = app

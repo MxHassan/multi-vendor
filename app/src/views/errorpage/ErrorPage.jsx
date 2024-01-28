@@ -6,7 +6,7 @@ export default function ErrorPage() {
   const error = useRouteError();
   console.error(error);
   return (
-    <div className="flex text-center items-center min-h-screen bg-[#f4f4f4] ">
+    <div className="flex text-center items-center min-h-screen bg-gray-50 ">
       <div className="max-w-4xl mx-auto">
         <div spacing={2}>
           <div>

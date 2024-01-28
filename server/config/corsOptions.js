@@ -1,4 +1,3 @@
-const ErrorHandler = require('../utils/ErrorHandler')
 const allowedOrigins = require('./allowedOrigins')
 
 const corsOptions = {

@@ -3,11 +3,17 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const SALT_WORK_FACTOR = 10
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
   {
-    fullName: {
+    firstName: {
       type: String,
-      required: [true, 'Please enter your name!']
+      get: capitalizeFirstLetter,
+      required: [true, 'Please enter your first name!']
+    },
+    lastName: {
+      type: String,
+      get: capitalizeFirstLetter,
+      required: [true, 'Please enter your last name!']
     },
     email: {
       type: String,
@@ -20,7 +26,7 @@ const userSchema = new Schema(
       select: false
     },
     phoneNumber: {
-      Number
+      type: Number
     },
     addresses: [
       {
@@ -62,29 +68,56 @@ const userSchema = new Schema(
     //     required: true
     //   }
     // },
+    isActive: {
+      type: Boolean,
+      default: true
+    },
     resetPasswordToken: String,
     resetPasswordTime: Date
   },
   { timestamps: true }
 )
+// virtual full name and capitalization
+UserSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`
+})
+function capitalizeFirstLetter(v) {
+  return v.charAt(0).toUpperCase() + v.substring(1)
+}
 // Hash Password
-userSchema.pre('save', async function save(next) {
+UserSchema.pre('save', async function save(next) {
   if (!this.isModified('password')) return next()
   try {
     const salt = await bcrypt.genSalt(SALT_WORK_FACTOR)
-    this.password = await bcrypt.hash(this.password, salt)
+    const hashedPassword = await bcrypt.hash(this.password, salt)
+    this.password = hashedPassword
     return next()
   } catch (err) {
     return next(err)
   }
 })
-// // jwt token
-// userSchema.methods.getJwtToken = function () {
-//   return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRES })
-// }
+// jwt access token
+UserSchema.methods.getJwtAccessToken = function () {
+  const payload = {
+    userInfo: {
+      id: this._id
+    }
+  }
+  return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRES })
+}
+// jwt access token
+UserSchema.methods.getJwtRefreshToken = function () {
+  const payload = {
+    userInfo: {
+      id: this._id
+    }
+  }
+  return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRES })
+}
 // compare passwords
-userSchema.methods.comparePassword = async function (enteredPassword) {
+UserSchema.methods.validatePassword = async function validatePassword(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password)
 }
-const User = mongoose.model('User', userSchema)
+
+const User = mongoose.model('User', UserSchema)
 module.exports = User
