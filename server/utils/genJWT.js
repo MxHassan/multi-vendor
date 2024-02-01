@@ -1,22 +1,24 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const createActivationToken = (user) => {
-  return jwt.sign(user, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: process.env.ACTIVATION_TOKEN_EXPIRES })
-}
+  return jwt.sign(user, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: process.env.ACTIVATION_TOKEN_EXPIRES });
+};
 const sendToken = async (user, statusCode, res) => {
-  const accessToken = await user.getJwtAccessToken()
-  const refreshToken = await user.getJwtRefreshToken()
+  const accessToken = await user.getJwtAccessToken();
+  const refreshToken = await user.getJwtRefreshToken();
   const options = {
-    expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
     httpOnly: true,
     secure: true,
-    sameSite: 'none'
-  }
+    sameSite: 'None',
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7day
+  };
   res.status(statusCode).cookie('jwt', refreshToken, options).json({
     success: true,
+    message: 'User Authenticated successfully',
     // user,
     accessToken
-  })
-}
+  });
+};
 
-module.exports = { sendToken, createActivationToken }
+module.exports = { sendToken, createActivationToken };

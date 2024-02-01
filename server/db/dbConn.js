@@ -1,10 +1,6 @@
 const { default: mongoose } = require('mongoose')
+require('dotenv').config()
 
-if (process.env.NODE_ENV !== 'PRODUCTION') {
-  require('dotenv').config({
-    path: 'config/.env'
-  })
-}
 
 const connectDB = async () => {
   try {

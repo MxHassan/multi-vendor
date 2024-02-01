@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import styles from '../../styles/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../../constants';
 import { toast } from 'react-toastify';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
@@ -15,19 +16,23 @@ const Login = () => {
     let formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    // console.log(first);
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
+      // withCredentials: true
     };
     await axios
       .post(`${BASE_URL}/auth/login`, formData, config)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data)
+        if (res.data.success) {
+          toast.success(res.data.message);
+          // navigate('/')
+        }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err.response.data)
         toast.error(err.response.data.message);
       });
   };
@@ -48,6 +53,7 @@ const Login = () => {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type="email"
                   name="email"
+                  id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
@@ -64,6 +70,7 @@ const Login = () => {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   type={visible ? 'text' : 'password'}
                   name="password"
+                  id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"

@@ -1,1 +1,1 @@
-export const user = !true;
+export const user = !true

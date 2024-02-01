@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { user } from './UserContext';
+import { user } from '../utils/UserContext';
 
-const ProtectedRouter = () => {
+const ProtectedRoutes = () => {
   return user ? <Outlet /> : <Navigate to="/welcome" />;
 };
 
-export default ProtectedRouter;
+export default ProtectedRoutes;
