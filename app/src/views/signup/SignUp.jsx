@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import axiosApi from '../../api/axios'
 import { ValidiateProps } from '../../utils/validation'
+import { REGISTER_URL } from '../../constants'
 // const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
-const REGISTER_URL = '/users/create-user'
 const SignUp = () => {
   // const navigate = useNavigate();
   const [firstName, setFirstName] = useState('')
@@ -14,6 +14,7 @@ const SignUp = () => {
   const [avatar, setAvatar] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
   const [matchError, setMatchError] = useState(false)
+  const [disabled, setDisabled] = useState(true)
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -64,53 +65,66 @@ const SignUp = () => {
     updateError(e.target.name, result)
   }
   useEffect(() => {
-    if (values.password !== values.confirmPassword) {
+    if (
+      !values.email ||
+      !values.password ||
+      !values.confirmPassword ||
+      !firstName ||
+      !lastName ||
+      !avatar ||
+      errors.username ||
+      errors.email ||
+      errors.password ||
+      errors.confirmPassword ||
+      matchError
+    ) {
+      setDisabled(true)
+    } else {
+      setDisabled(false)
+    }
+    if (
+      !errors.password &&
+      !errors.confirmPassword &&
+      values.password !== values.confirmPassword
+    ) {
       setMatchError(true)
     } else {
       setMatchError(false)
     }
-  }, [values.password, values.confirmPassword])
+  }, [values, errors, matchError, firstName, lastName, avatar])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (
-      !errors.username &&
-      !errors.email &&
-      !errors.password &&
-      !errors.confirmPassword &&
-      !matchError
-    ) {
-      let formData = new FormData()
-      formData.append('firstName', firstName)
-      formData.append('lastName', lastName)
-      formData.append('email', values.email)
-      formData.append('password', values.password)
-      formData.append('confirmPassword', values.confirmPassword)
-      formData.append('file', avatar)
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+    let formData = new FormData()
+    formData.append('firstName', firstName)
+    formData.append('lastName', lastName)
+    formData.append('email', values.email)
+    formData.append('password', values.password)
+    formData.append('confirmPassword', values.confirmPassword)
+    formData.append('file', avatar)
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-      try {
-        const res = await axiosApi.post(REGISTER_URL, formData, config)
-        if (res.data.success === true) {
-          toast.success(res.data.message)
-          setFirstName('')
-          setLastName('')
-          setValues({ email: '', password: '', confirmPassword: '' })
-          setAvatar(null)
-          // setTimeout(() => {
-          //   navigate('/');
-          // }, 1000);
-        }
-      } catch (err) {
-        if (!err?.response) {
-          toast.error('No Server Response')
-          toast.error(err.response.data.message)
-        } else {
-          toast.error(err.response.data.message)
-          toast.error('Registration Failed')
-        }
+    }
+    try {
+      const res = await axiosApi.post(REGISTER_URL, formData, config)
+      if (res.data.success === true) {
+        toast.success(res.data.message)
+        setFirstName('')
+        setLastName('')
+        setValues({ email: '', password: '', confirmPassword: '' })
+        setAvatar(null)
+        setShowPassword(false)
+        // setTimeout(() => {
+        //   navigate('/');
+        // }, 1000);
+      }
+    } catch (err) {
+      if (!err?.response) {
+        toast.error('No Server Response')
+      } else {
+        toast.error(`Registration Failed: ${err.response.data.message}`)
       }
     }
   }
@@ -239,7 +253,8 @@ const SignUp = () => {
             <div>
               <button
                 type='submit'
-                className=' relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 '
+                disabled={disabled}
+                className=' disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 '
               >
                 Sign Up
               </button>

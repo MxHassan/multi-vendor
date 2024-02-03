@@ -13,5 +13,5 @@ router.route('/activation').post(verifyActivationToken, activateUser);
 router.route('/').get(getAllUsers);
 router.use(verifyJWT);
 router.route('/user').get(getUser).patch(updateUser).delete(deleteUser);
-
+  
 module.exports = router;

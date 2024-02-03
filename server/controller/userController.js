@@ -15,7 +15,7 @@ const getUser = asyncHandler(async (req, res) => {
   if (!user) return res.status(400).json({ message: 'No user found with that id' });
   res.status(200).json({ success: true, user });
 });
-
+  
 // @desc get all users
 // @route GET /users
 // @access Private

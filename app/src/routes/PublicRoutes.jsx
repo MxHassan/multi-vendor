@@ -1,8 +1,9 @@
+import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
-import { user } from '../utils/UserContext'
 
 const PublicRoutes = () => {
-  return !user ? <Outlet /> : <Navigate to='/' />
+  const { isAuthenticated } = useSelector((state) => state.user)
+  return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
 }
 
 export default PublicRoutes

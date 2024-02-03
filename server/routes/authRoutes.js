@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route('/login').post(loginLimiter, login);
 
-router.route('/logout').get(logout);
+router.route('/logout').post(logout);
 
 router.route('/refresh').get(refresh);
 module.exports = router;
