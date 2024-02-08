@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom'
-import { RxAvatar } from 'react-icons/rx'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import axiosApi from '../../api/axios'
 import { ValidiateProps } from '../../utils/validation'
 import { REGISTER_URL } from '../../constants'
-// const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
+import { Avatar, Checkbox, Input, Typography } from '@material-tailwind/react'
+import { UserCircleIcon } from '@heroicons/react/24/outline'
 const SignUp = () => {
   // const navigate = useNavigate();
   const [firstName, setFirstName] = useState('')
@@ -32,6 +31,7 @@ const SignUp = () => {
       type: 'email',
       label: 'Email Address',
       autoComplete: 'email',
+      placeholder: 'name@example.com',
       errormessage: 'It should be a valid email address !'
     },
     {
@@ -40,6 +40,7 @@ const SignUp = () => {
       type: showPassword ? 'text' : 'password',
       label: 'Password',
       autoComplete: 'new-password',
+      placeholder: '********',
       errormessage:
         'Password should be 8-24 characters and include at least 1 uppercase letter , 1 lowercase letter , 1 number and 1 special character !'
     },
@@ -49,6 +50,7 @@ const SignUp = () => {
       type: showPassword ? 'text' : 'password',
       label: 'Confirm Password',
       autoComplete: 'new-password',
+      placeholder: '********',
       errormessage:
         'Password should be 8-24 characters and include at least 1 uppercase letter , 1 lowercase letter , 1 number and 1 special character !'
     }
@@ -65,6 +67,24 @@ const SignUp = () => {
     updateError(e.target.name, result)
   }
   useEffect(() => {
+    if (values.email === '' && errors.email) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: false
+      }))
+    }
+    if (values.password === '' && errors.password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: false
+      }))
+    }
+    if (values.confirmPassword === '' && errors.confirmPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: false
+      }))
+    }
     if (
       !values.email ||
       !values.password ||
@@ -85,7 +105,8 @@ const SignUp = () => {
     if (
       !errors.password &&
       !errors.confirmPassword &&
-      values.password !== values.confirmPassword
+      values.password !== values.confirmPassword &&
+      !(values.password === '' || values.confirmPassword === '')
     ) {
       setMatchError(true)
     } else {
@@ -129,17 +150,17 @@ const SignUp = () => {
     }
   }
   return (
-    <div className='min-h-screen bg-gray-50 flex-col justify-center py-12 sm:px-6 lg:px-8'>
+    <div className='min-w-96 flex-col justify-center py-12 sm:px-6 lg:px-8 '>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
         <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
           Sign Up a new account
         </h2>
       </div>
-      <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
+      <div className='mt-8 sm:mx-auto max-sm:w-full sm:max-w-lg'>
         <div className='bg-white p-8 shadow sm:rounded-lg sm:px-10'>
           <form noValidate onSubmit={handleSubmit} className='space-y-6'>
             <div className='flex justify-between'>
-              <div className='max-sm:mr-5 mr-3'>
+              <div className=' mr-2'>
                 <label
                   htmlFor='firstName'
                   className='block text-sm font-medium text-gray-700'
@@ -159,7 +180,7 @@ const SignUp = () => {
                   />
                 </div>
               </div>
-              <div className='max-sm:ml-5 ml-3'>
+              <div className='ml-2'>
                 <label
                   htmlFor='lastName'
                   className='block text-sm font-medium text-gray-700'
@@ -189,15 +210,17 @@ const SignUp = () => {
                   {input.label}
                 </label>
                 <div className='mt-1'>
-                  <input
-                    className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
+                  <Input
+                    color='blue'
+                    placeholder={input.placeholder}
+                    size='lg'
                     type={input.type}
                     name={input.name}
                     id={input.id}
                     value={values[input.name]}
                     onChange={onChange}
                     autoComplete={input.id}
-                    required
+                    error={errors[input.name]}
                   />
                   {errors[input.name] && (
                     <p className='p-1 text-xs text-red-700 opacity-75'>
@@ -212,31 +235,32 @@ const SignUp = () => {
                 Passwords Don&apos;t match
               </p>
             )}
-            <div className='flex items-center'>
-              <input
-                className='mr-3 h-4 w-4'
-                type='checkbox'
-                id='showPassword'
-                onClick={() => setShowPassword(!showPassword)}
-              />
-              <label htmlFor='showPassword'>Show Password</label>
-            </div>
+            <Checkbox
+              color='indigo'
+              onClick={() => setShowPassword(!showPassword)}
+              id='showPassword'
+              label={
+                <Typography className='flex items-center font-normal'>
+                  Show Password
+                </Typography>
+              }
+              containerProps={{ className: '-ml-2.5' }}
+            />
             <div>
               <div className='mt-2 flex items-center'>
-                <span className='inline-block h-8 w-8 rounded-full overflow-hidden'>
+                <div className='inline-block h-10 w-10  overflow-hidden'>
                   {avatar ? (
-                    <img
+                    <Avatar
+                      className='w-full h-full'
                       src={URL.createObjectURL(avatar)}
-                      alt='profile picture'
-                      className='h-full w-full object-cover rounded-full'
                     />
                   ) : (
-                    <RxAvatar className='h-8 w-8' />
+                    <UserCircleIcon className='w-fit h-fit' />
                   )}
-                </span>
+                </div>
                 <label
                   htmlFor='file-input'
-                  className='ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
+                  className='duration-100 ml-4 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                 >
                   <span>Upload File</span>
                   <input
@@ -254,7 +278,7 @@ const SignUp = () => {
               <button
                 type='submit'
                 disabled={disabled}
-                className=' disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 '
+                className='duration-300 disabled:hover:cursor-not-allowed disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-[4px] text-white bg-blue-800 hover:bg-blue-900 '
               >
                 Sign Up
               </button>
@@ -263,7 +287,7 @@ const SignUp = () => {
               Already have an account?{' '}
               <Link
                 to='/login'
-                className='font-medium text-blue-600 hover:text-blue-500'
+                className='duration-100 font-medium text-blue-600 hover:text-blue-500'
               >
                 Login
               </Link>

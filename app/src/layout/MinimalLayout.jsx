@@ -1,11 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'
+import Footer from '../components/footer/Footer.jsx'
+import Header from '../components/header/Header.jsx'
 
 const MinimalLayout = () => {
   return (
-    <div className="w-full h-screen bg-gray-50">
+    <>
+      <Header />
       <Outlet />
-    </div>
-  );
-};
+      <Footer />
+    </>
+  )
+}
 
-export default MinimalLayout;
+export default MinimalLayout

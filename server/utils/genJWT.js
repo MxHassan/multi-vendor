@@ -11,7 +11,7 @@ const sendToken = async (user, statusCode, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
-    maxAge: 15 * 60 * 1000 // 2 min
+    maxAge: 2 * 60 * 1000 // 2 min
     // maxAge: 7 * 24 * 60 * 60 * 1000 // 7day
   };
   res.status(statusCode).cookie('jwt', refreshToken, options).json({

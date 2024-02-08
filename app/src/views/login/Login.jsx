@@ -1,22 +1,26 @@
-import { useState } from 'react'
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { useEffect, useState } from 'react'
+// import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import styles from '../../styles/styles'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/auth/authSlice'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
-import { Backdrop, CircularProgress } from '@mui/material'
-import { useGetUserDetailsQuery } from '../../features/user/userApiSlice'
-import { setUser } from '../../features/user/userSlice'
+import { Dialog, Spinner } from '@material-tailwind/react'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [login, { isLoading, isSuccess }] = useLoginMutation()
-  const getUserDetails = useGetUserDetailsQuery()
+  const [login, { isLoading }] = useLoginMutation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [visible, setVisible] = useState()
+  const [disabled, setDisabled] = useState(true)
+  useEffect(() => {
+    if (!email || !password) setDisabled(true)
+    else setDisabled(false)
+  }, [email, password])
   const handleSubmit = async (e) => {
     e.preventDefault()
     let formData = new FormData()
@@ -34,13 +38,6 @@ const Login = () => {
       setPassword('')
       setVisible(false)
       toast.success(res.message)
-      await getUserDetails()
-        .then((res) => {
-          dispatch(setUser(res.data.user))
-        })
-        .catch((err) => {
-          toast.error(err.data.message)
-        })
       navigate('/')
       // console.log(userRes.data.user)
     } catch (err) {
@@ -52,16 +49,16 @@ const Login = () => {
   }
   if (isLoading) {
     return (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      <Dialog
         open={isLoading}
+        className='bg-transparent flex justify-center shadow-none'
       >
-        <CircularProgress color='primary' />
-      </Backdrop>
+        <Spinner color='blue' className='w-8' />
+      </Dialog>
     )
   }
   return (
-    <div className='min-h-screen bg-gray-50 flex-col justify-center py-12 sm:px-6 lg:px-8'>
+    <div className='flex-col justify-center py-12 sm:px-6 lg:px-8'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
         <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
           Login with your account
@@ -109,13 +106,13 @@ const Login = () => {
                   required
                 />
                 {visible ? (
-                  <AiOutlineEye
+                  <EyeIcon
                     className='absolute right-2 top-2 cursor-pointer'
                     size={25}
                     onClick={() => setVisible(false)}
                   />
                 ) : (
-                  <AiOutlineEyeInvisible
+                  <EyeSlashIcon
                     className='absolute right-2 top-2 cursor-pointer'
                     size={25}
                     onClick={() => setVisible(true)}
@@ -141,7 +138,7 @@ const Login = () => {
               <div className='text-sm'>
                 <Link
                   to='/forget-password'
-                  className='font-medium text-blue-600 hover:text-blue-500'
+                  className='duration-100 font-medium text-blue-700 hover:text-blue-500'
                 >
                   Forget your password?
                 </Link>
@@ -150,7 +147,8 @@ const Login = () => {
             <div>
               <button
                 type='submit'
-                className='group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 '
+                disabled={disabled}
+                className='duration-300 disabled:hover:cursor-not-allowed disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-[4px] text-white bg-blue-800 hover:bg-blue-900 '
               >
                 Login
               </button>
@@ -158,8 +156,8 @@ const Login = () => {
             <div>
               Not have any account?{' '}
               <Link
-                to='/sign-up'
-                className='font-medium text-blue-600 hover:text-blue-500'
+                to='/signup'
+                className='duration-100 font-medium text-blue-700 hover:text-blue-500'
               >
                 Sign Up
               </Link>

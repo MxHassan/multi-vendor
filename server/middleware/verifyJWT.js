@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
-require('dotenv').config()
+require('dotenv').config();
 
 const verifyActivationToken = (req, res, next) => {
   const { activationToken } = req.body;
@@ -14,8 +14,9 @@ const verifyActivationToken = (req, res, next) => {
 };
 const verifyJWT = asyncHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization || req.headers.Authorization;
+  // console.log(authHeader);
   if (!authHeader?.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized no authheader token' });
   }
   const token = authHeader.split(' ')[1];
   // console.log(token);

@@ -12,27 +12,24 @@ import MinimalLayout from '../layout/MinimalLayout'
 import MainLayout from '../layout/MainLayout'
 import Home from '../views/home/Home'
 import ActivationPage from '../views/activation/ActivationPage.jsx'
-import ProtectedRoutes from './ProtectedRoutes.jsx'
-import PublicRoutes from './PublicRoutes.jsx'
+// import ProtectedRoutes from './ProtectedRoutes.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route element={<ProtectedRoutes />} errorElement={<ErrorPage />}>
+      <Route element={<MinimalLayout />} errorElement={<ErrorPage />}>
+        <Route path='welcome' element={<Public />} /> {/* public routes*/}
+        <Route path='login' element={<Login />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route
+          path='activation/:activationToken'
+          element={<ActivationPage />}
+        />
+        {/* <Route element={<ProtectedRoutes />} > */}
         <Route path='/' element={<MainLayout />}>
           <Route index element={<Home />} />
         </Route>
-      </Route>
-      <Route element={<PublicRoutes />} errorElement={<ErrorPage />}>
-        <Route element={<MinimalLayout />}>
-          <Route path='/welcome' element={<Public />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/sign-up' element={<SignUp />} />
-          <Route
-            path='/activation/:activationToken'
-            element={<ActivationPage />}
-          />
-        </Route>
+        {/* </Route> */}
       </Route>
     </>
   )

@@ -6,7 +6,8 @@
 * {
   scroll-behavior: smooth;
 }
-body {
-  font-family: 'Roboto', 'Poppins', sans-serif;
-  background: #f6f6f5;
+html {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  height: 100vh;
 }

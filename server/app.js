@@ -7,12 +7,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
+const morgan = require('morgan');
 require('dotenv').config();
 // const ErrorHandler = require('./utils/ErrorHandler')
 
 // middleware
 app.use(logger);
 app.use(cors(corsOptions));
+app.use(morgan('combined'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
