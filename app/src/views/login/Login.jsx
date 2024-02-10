@@ -107,14 +107,14 @@ const Login = () => {
                 />
                 {visible ? (
                   <EyeIcon
-                    className='absolute right-2 top-2 cursor-pointer'
-                    size={25}
+                    className='absolute right-2 top-2 cursor-pointer animate-fade-in duration-[50ms]'
+                    width={24}
                     onClick={() => setVisible(false)}
                   />
                 ) : (
                   <EyeSlashIcon
-                    className='absolute right-2 top-2 cursor-pointer'
-                    size={25}
+                    className='absolute right-2 top-2 cursor-pointer animate-fade-in duration-75'
+                    width={24}
                     onClick={() => setVisible(true)}
                   />
                 )}

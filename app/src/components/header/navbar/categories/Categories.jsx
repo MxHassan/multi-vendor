@@ -1,23 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Bars3BottomLeftIcon,
   ChevronDownIcon
 } from '@heroicons/react/24/outline'
-import { Menu, MenuHandler, MenuList, Button } from '@material-tailwind/react'
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  Button,
+  List,
+  ListItem,
+  ListItemPrefix
+} from '@material-tailwind/react'
 import { categoriesData } from '../../../../static/data'
+import { Link } from 'react-router-dom'
 
 const Categories = () => {
   const [dropDown, setDropDown] = useState(false)
+  useEffect(() => {})
   const handleDropMenu = () => {
     setDropDown(!dropDown)
   }
   return (
     <>
-      <div className='h-[60px] mt-[10px] w-[270px] '>
+      <div className='h-[60px] mt-[10px] w-[270px]  '>
         <Menu open={dropDown} handler={handleDropMenu}>
           <MenuHandler>
             <Button
-              className=' focus:opacity-[1] active:opacity-[1] focus:outline-0 h-full flex items-center justify-between font-Poppins text-lg font-[500] capitalize rounded-b-none '
+              className=' focus:opacity-[1] active:opacity-[1] h-full flex items-center justify-between font-Poppins text-lg font-[500] capitalize rounded-b-none '
               ripple={false}
               color='white'
               fullWidth
@@ -32,15 +42,34 @@ const Categories = () => {
               />
             </Button>
           </MenuHandler>
-          <MenuList className='hidden w-[270px] grid-cols-7 gap-3 overflow-visible lg:grid'>
+          <MenuList className='hidden 400px:flex 400px:flex-col w-[270px] grid-cols-7 gap-3  lg:grid  p-0'>
             {/* {children} */}
             {/* drop menu */}
-            <div onClick={handleDropMenu} className='pb-4 w-full  '>
+            <List className='p-2 focus:outline-none max-h-[40vh] overflow-scroll overflow-x-hidden small-scrollbar'>
               {categoriesData &&
-                categoriesData.map((categorie, index) => (
-                  <div className='' key={index}></div>
-                ))}
-            </div>
+                categoriesData.map((categorie, index) => {
+                  const d = categorie.title.toLowerCase()
+                  const categorieUrl = d.replace(/\s+/g, '-')
+                  return (
+                    <Link key={index} to={`/categories/${categorieUrl}`}>
+                      <ListItem
+                        className='p-0 hover:scale-[1.05] duration-300'
+                        key={index}
+                        id={categorie.id}
+                      >
+                        <ListItemPrefix className='w-16 shrink-0 rounded-lg'>
+                          <img
+                            src={categorie.image_Url}
+                            alt=''
+                            className='w-full h-full object-cover '
+                          />
+                        </ListItemPrefix>
+                        {categorie.title}
+                      </ListItem>
+                    </Link>
+                  )
+                })}
+            </List>
           </MenuList>
         </Menu>
       </div>
