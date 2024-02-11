@@ -1,8 +1,9 @@
+import { Button } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
 
 const Public = () => {
   return (
-    <section className='items-center justify-around flex flex-col max-w-4xl mx-auto'>
+    <section className='items-center h-[80vh] justify-around flex flex-col max-w-4xl mx-auto'>
       <header>
         <h1 className='text-4xl'>
           Welcome to <span>xMo E-Commerce</span>
@@ -28,16 +29,22 @@ const Public = () => {
         <p className='text-lg'>Owner: Mohamed Hassan</p>
       </main>
       <footer>
-        <div className='flex min-w-96 justify-around'>
+        <div className='flex min-w-96 justify-around my-3'>
           <Link to='/login'>
-            <button className='relative w-40 h-[40px] flex justify-center my-2 py-2 px-4 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 '>
+            <Button
+              color='blue'
+              className='capitalize py-2 font-medium w-40 text-base  '
+            >
               Login
-            </button>
+            </Button>
           </Link>
-          <Link to='/sign-up'>
-            <button className='relative w-40 h-[40px] flex justify-center my-2 py-2 px-4 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 '>
+          <Link to='/signup'>
+            <Button
+              className='capitalize py-2 font-medium w-40 text-base  '
+              color='blue'
+            >
               Sign Up
-            </button>
+            </Button>
           </Link>
         </div>
       </footer>

@@ -1,6 +1,6 @@
 const NewsLetterArea = () => {
   return (
-    <div className='bg-[#342ac8] md:flex md:justify-between py-7 px-4 sm:px-12 md:items-center'>
+    <div className='bg-indigo-600  md:flex md:justify-between py-7 px-4 sm:px-12 md:items-center'>
       <h1 className='lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold md:w-2/5'>
         <span className='text-[#56d879]'>Subscribe</span> to get news events and
         offers!

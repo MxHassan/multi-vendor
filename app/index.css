@@ -43,4 +43,7 @@
     width: 100%;
     padding-left: 50px;
   }
+  .carouselHeight {
+    height: calc(70vh - 160px);
+  }
 }
