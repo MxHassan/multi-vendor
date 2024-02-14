@@ -1,10 +1,14 @@
+import CategoriesSection from '../catagoriessection/CategoriesSection'
 import CarouselWithActions from './carousel/CarouselWithActions'
 
 const Hero = () => {
   return (
-    <div className='w-11/12 mx-auto '>
+    <>
       <CarouselWithActions />
-    </div>
+      <div className='w-11/12 mx-auto '>
+        <CategoriesSection />
+      </div>
+    </>
   )
 }
 export default Hero

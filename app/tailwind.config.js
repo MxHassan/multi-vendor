@@ -34,11 +34,26 @@ export default withMT({
             // transform: 'translateY(5px)',
             opacity: 0
           }
+        },
+        'spin-out': {
+          '0%': {
+            transform: 'rotate(2turn) scale(1)',
+            opacity: 1
+          },
+          '95%': {
+            transform: 'rotate(0deg) scale(0)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: 1
+          }
         }
       },
       animation: {
         'fade-in': 'fade-in 0.2s ease-in-out forwards',
-        'fade-out': 'fade-out 0.2s ease-in-out forwards'
+        'fade-out': 'fade-out 0.2s ease-in-out forwards',
+        'spin-out': 'spin-out 0.3s ease-out forwards'
       }
     }
   },

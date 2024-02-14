@@ -3,6 +3,7 @@ const navSlice = createSlice({
   name: 'nav',
   initialState: {
     openNav: false,
+    navLinkValue: '',
     mobileNav: false,
     navActive: false,
     openCart: false,
@@ -11,6 +12,9 @@ const navSlice = createSlice({
   reducers: {
     setOpenNav: (state, action) => {
       state.openNav = action.payload
+    },
+    setNavLinkValue: (state, action) => {
+      state.navLinkValue = action.payload
     },
     setMobileNav: (state, action) => {
       state.mobileNav = action.payload
@@ -39,10 +43,12 @@ export const {
   setOpenCart,
   setCloseCart,
   setOpenWishlist,
-  setCloseWishlist
+  setCloseWishlist,
+  setNavLinkValue
 } = navSlice.actions
 export default navSlice.reducer
 export const selectOpenNav = (state) => state.nav.openNav
+export const selectNavLinkValue = (state) => state.nav.navLinkValue
 export const selectDropDown = (state) => state.nav.dropDown
 export const selectMobileNav = (state) => state.nav.mobileNav
 export const selectNavActive = (state) => state.nav.navActive

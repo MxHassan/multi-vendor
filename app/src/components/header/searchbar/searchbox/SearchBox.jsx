@@ -1,15 +1,7 @@
 import { useState } from 'react'
 import { productData } from '../../../../static/data'
 import { Link } from 'react-router-dom'
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Input,
-  List,
-  ListItem,
-  Typography
-} from '@material-tailwind/react'
+import { Card, CardBody, CardHeader, Input, List, ListItem, Typography } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 const Search = () => {
@@ -21,10 +13,7 @@ const Search = () => {
     const term = e.target.value
     setSearchTerm(term)
     const filteredProducts =
-      productData &&
-      productData.filter((product) =>
-        product.name.toLowerCase().includes(term.toLowerCase())
-      )
+      productData && productData.filter((product) => product.name.toLowerCase().includes(term.toLowerCase()))
     setSearchData(filteredProducts)
   }
   return (
@@ -39,15 +28,8 @@ const Search = () => {
           if (searchActive) setSearchActive(false)
         }}
         type='search'
-        className='h-10 search-hover mx-auto placeholder:text-blue-gray-300 focus:!border-blue-300 1300px:w-[300px] 1100px:w-[200px] 800px:w-32  '
-        icon={
-          searchActive && (
-            <MagnifyingGlassIcon
-              width={25}
-              className='animate-fade-in duration-500'
-            />
-          )
-        }
+        className='h-10 pl-12 hover:w-[80%] focus:w-full duration-500 mx-auto placeholder:text-blue-gray-300 focus:!border-blue-300 1300px:w-[300px] 1100px:w-[200px] 800px:w-32  '
+        icon={searchActive && <MagnifyingGlassIcon width={25} className='animate-fade-in duration-500' />}
         value={searchTerm}
         onChange={handleSearchChange}
         placeholder='Search for a product...'
@@ -56,7 +38,7 @@ const Search = () => {
         }}
       />
       {searchData && searchTerm !== '' && searchData.length !== 0 && (
-        <div className='absolute  w-full  '>
+        <div className='absolute  w-full z-20 '>
           <List className=' mx-auto w-11/12  bg-gray-300 small-scrollbar rounded-[4px] px-2 py-1 1000px:px-4 max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 '>
             {searchData.map((i, index) => {
               const d = i.name

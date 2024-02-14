@@ -8,7 +8,7 @@
   }
   html {
     --tw-bg-opacity: 1;
-    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+    background-color: rgb(242 242 241 / var(--tw-bg-opacity));
     height: 100vh;
   }
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -27,23 +27,16 @@
     width: 5px;
     height: 5px;
   }
-  .search-hover {
-    border: 1px solid #ccc;
-    outline: none;
-    background-size: 22px;
-    background-position: 13px;
-    border-radius: 6px;
-    transition: all 0.5s;
+  .preview-scrollbar::-webkit-scrollbar-track {
+    margin-top: 30px;
   }
-  .search-hover:hover {
-    width: 80%;
-    padding-left: 50px;
+  #hover-rotate > .icon {
+    cursor: pointer;
+    transform: scale(1), rotateY(0deg);
+    transition: ease-in-out 0.5s;
   }
-  .search-hover:focus {
-    width: 100%;
-    padding-left: 50px;
-  }
-  .carouselHeight {
-    height: calc(70vh - 160px);
+  #hover-rotate:hover > .icon {
+    transform: scale(1.15) rotateY(360deg);
+    transition: ease-in 0.4s;
   }
 }
