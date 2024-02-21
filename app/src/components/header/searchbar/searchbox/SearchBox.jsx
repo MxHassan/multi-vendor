@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { productData } from '../../../../static/data'
 import { Link } from 'react-router-dom'
-import { Card, CardBody, CardHeader, Input, List, ListItem, Typography } from '@material-tailwind/react'
+// import { Card, CardBody, CardHeader, Input, List, ListItem, Typography } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import styles from '../../../../styles/styles'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -18,51 +19,54 @@ const Search = () => {
   }
   return (
     <div className='w-1/2 relative '>
-      <Input
-        // color='blue'
-        containerProps={{ className: 'flex' }}
-        onFocus={() => {
-          if (!searchActive) setSearchActive(true)
-        }}
-        onBlur={() => {
-          if (searchActive) setSearchActive(false)
-        }}
-        type='search'
-        className='h-10 pl-12 hover:w-[80%] focus:w-full duration-500 mx-auto placeholder:text-blue-gray-300 focus:!border-blue-300 1300px:w-[300px] 1100px:w-[200px] 800px:w-32  '
-        icon={searchActive && <MagnifyingGlassIcon width={25} className='animate-fade-in duration-500' />}
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder='Search for a product...'
-        labelProps={{
-          className: 'before:content-none after:content-none'
-        }}
-      />
+      <div className='flex relative '>
+        <div className='absolute top-2 left-2'>
+          {searchActive && (
+            <MagnifyingGlassIcon width={25} className='animate-fade-in text-gray-700 dark:text-white ' />
+          )}
+        </div>
+        <input
+          // color='blue'
+          onFocus={() => {
+            if (!searchActive) setSearchActive(true)
+          }}
+          onBlur={() => {
+            if (searchActive) setSearchActive(false)
+          }}
+          type='search'
+          className='h-10  pl-10 pr-2 bg-light-background-secondary  dark:bg-dark-background-secondary  dark:text-dark-text-primary placeholder:opacity-0  dark:placeholder:text-white rounded-lg hover:w-[80%] hover:placeholder:opacity-50 focus:placeholder:opacity-100 focus:w-full duration-500 mx-auto placeholder:text-gray-600 focus:bg-light-background-paper dark:focus:bg-dark-background-third 1300px:w-[300px] 1100px:w-[200px] 800px:w-32  '
+          value={searchTerm}
+          onChange={handleSearchChange}
+          placeholder='Search for a product...'
+          // labelProps={{
+          //   className: 'before:content-none after:content-none'
+          // }}
+        />
+      </div>
       {searchData && searchTerm !== '' && searchData.length !== 0 && (
-        <div className='absolute  w-full z-20 '>
-          <List className=' mx-auto w-11/12  bg-gray-300 small-scrollbar rounded-[4px] px-2 py-1 1000px:px-4 max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 '>
+        <div className='absolute mt-1 w-full z-20 '>
+          <div
+            className={` mx-auto w-11/12  bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary  small-scrollbar rounded-[4px] px-2 py-1 1000px:px-4  max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
+          >
             {searchData.map((i, index) => {
               const d = i.name
               const Product_name = d.replace(/\s+/g, '-')
               return (
                 <Link key={index} to={`/product/${Product_name}`}>
-                  <ListItem className='p-0 hover:scale-[1.05] duration-300 '>
-                    <Card className='w-full rounded-md h-[80px] flex-row'>
-                      <CardHeader className='m-0 1000px:w-20 w-16 shrink-0 rounded-lg '>
-                        <img
-                          src={i.image_Url[0].url}
-                          alt=''
-                          className='w-full h-full object-cover hover:scale-[1.3] duration-300 '
-                        />
-                      </CardHeader>
-                      <CardBody>
-                        <Typography color='black'>{i.name}</Typography>
-                      </CardBody>
-                    </Card>
-                  </ListItem>
+                  <div className='my-1 p-0 hover:scale-[1.05] duration-300 '>
+                    <div className='w-full rounded-md h-[80px] flex gap-4 items-center'>
+                      <div className='m-0 1000px:w-20 w-16 shrink-0  '>
+                        <img src={i.image_Url[0].url} alt='' className='w-full h-full object-cover rounded-lg ' />
+                      </div>
+                      <div>
+                        <p className='font-medium'>{i.name}</p>
+                      </div>
+                    </div>
+                  </div>
                 </Link>
               )
             })}
-          </List>
+          </div>
         </div>
       )}
     </div>

@@ -17,11 +17,13 @@ import Faq from '../views/faq/FAQ.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route element={<MinimalLayout />} errorElement={<ErrorPage />}>
-        <Route path='welcome' element={<Public />} /> {/* public routes*/}
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<SignUp />} />
-        <Route path='activation/:activationToken' element={<ActivationPage />} />
+      <Route errorElement={<ErrorPage />}>
+        <Route element={<MinimalLayout />}>
+          <Route path='welcome' element={<Public />} /> {/* public routes*/}
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<SignUp />} />
+          <Route path='activation/:activationToken' element={<ActivationPage />} />
+        </Route>
         {/* <Route element={<ProtectedRoutes />} > */}
         <Route path='/' element={<MainLayout />}>
           <Route index element={<Home />} />

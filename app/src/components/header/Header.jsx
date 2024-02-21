@@ -6,9 +6,7 @@ import SearchBar from './searchbar/SearchBar'
 const Header = () => {
   return (
     <>
-      <div className={`${styles.section}`}>
-        <SearchBar />
-      </div>
+      <SearchBar />
       <Navbar />
     </>
   )

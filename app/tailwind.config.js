@@ -1,5 +1,7 @@
-import withMT from '@material-tailwind/react/utils/withMT'
-export default withMT({
+import lightTheme from './src/themes/lightTheme'
+import darkTheme from './src/themes/darkTheme'
+export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     fontFamily: {
@@ -7,6 +9,10 @@ export default withMT({
       Poppins: ['Poppins', 'sans-serif']
     },
     extend: {
+      colors: {
+        light: lightTheme,
+        dark: darkTheme
+      },
       screens: {
         '400px': '400px',
         '800px': '800px',
@@ -58,4 +64,4 @@ export default withMT({
     }
   },
   plugins: []
-})
+}
