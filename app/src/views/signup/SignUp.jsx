@@ -150,21 +150,16 @@ const SignUp = () => {
     }
   }
   return (
-    <div className='min-w-96 flex-col justify-center py-12 sm:px-6 lg:px-8 '>
+    <div className='min-w-96 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-light-background-main dark:bg-dark-background-main'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-        <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-          Sign Up a new account
-        </h2>
+        <h2 className='mt-6 text-center text-3xl font-extrabold '>Sign Up a new account</h2>
       </div>
-      <div className='mt-8 sm:mx-auto max-sm:w-full sm:max-w-lg'>
-        <div className='bg-white p-8 shadow sm:rounded-lg sm:px-10'>
+      <div className='mt-8 sm:mx-auto max-sm:w-full sm:max-w-lg bg-light-background-secondary dark:bg-dark-background-secondary rounded-lg'>
+        <div className=' p-8 shadow sm:rounded-lg sm:px-10'>
           <form noValidate onSubmit={handleSubmit} className='space-y-6'>
             <div className='flex justify-between'>
               <div className=' mr-2'>
-                <label
-                  htmlFor='firstName'
-                  className='block text-sm font-medium text-gray-700'
-                >
+                <label htmlFor='firstName' className='block text-sm font-medium '>
                   First Name
                 </label>
                 <div className='mt-1'>
@@ -181,10 +176,7 @@ const SignUp = () => {
                 </div>
               </div>
               <div className='ml-2'>
-                <label
-                  htmlFor='lastName'
-                  className='block text-sm font-medium text-gray-700'
-                >
+                <label htmlFor='lastName' className='block text-sm font-medium '>
                   Last Name
                 </label>
                 <div className='mt-1'>
@@ -203,10 +195,7 @@ const SignUp = () => {
             </div>
             {formInputs.map((input) => (
               <div key={input.id}>
-                <label
-                  htmlFor={input.id}
-                  className='block text-sm font-medium text-gray-700'
-                >
+                <label htmlFor={input.id} className='block text-sm font-medium '>
                   {input.label}
                 </label>
                 <div className='mt-1'>
@@ -221,26 +210,20 @@ const SignUp = () => {
                     onChange={onChange}
                     autoComplete={input.id}
                     error={errors[input.name]}
+                    className='bg-light-background-default '
                   />
-                  {errors[input.name] && (
-                    <p className='p-1 text-xs text-red-700 opacity-75'>
-                      {input.errormessage}
-                    </p>
-                  )}
+                  {errors[input.name] && <p className='p-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>}
                 </div>
               </div>
             ))}
-            {matchError && (
-              <p className='p-1 text-xs text-red-700 opacity-75'>
-                Passwords Don&apos;t match
-              </p>
-            )}
+            {matchError && <p className='p-1 text-xs text-red-700 opacity-75'>Passwords Don&apos;t match</p>}
             <Checkbox
               color='indigo'
               onClick={() => setShowPassword(!showPassword)}
               id='showPassword'
+              className='bg-light-background-default'
               label={
-                <Typography className='flex items-center font-normal'>
+                <Typography className='flex items-center text-light-common-black dark:text-dark-common-white font-normal'>
                   Show Password
                 </Typography>
               }
@@ -250,17 +233,14 @@ const SignUp = () => {
               <div className='mt-2 flex items-center'>
                 <div className='inline-block h-10 w-10  overflow-hidden'>
                   {avatar ? (
-                    <Avatar
-                      className='w-full h-full'
-                      src={URL.createObjectURL(avatar)}
-                    />
+                    <Avatar className='w-full h-full' src={URL.createObjectURL(avatar)} />
                   ) : (
                     <UserCircleIcon className='w-fit h-fit' />
                   )}
                 </div>
                 <label
                   htmlFor='file-input'
-                  className='duration-100 ml-4 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
+                  className='duration-100 ml-4 bg-light-background-default dark:bg-dark-background-main cursor-pointer flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium '
                 >
                   <span>Upload File</span>
                   <input
@@ -278,17 +258,14 @@ const SignUp = () => {
               <button
                 type='submit'
                 disabled={disabled}
-                className='duration-300 disabled:hover:cursor-not-allowed disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-[4px] text-white bg-blue-800 hover:bg-blue-900 '
+                className='duration-300 disabled:hover:cursor-not-allowed disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-[4px]  bg-light-primary-main dark:bg-dark-primary-dark hover:bg-light-primary-light hover:hover:bg-light-primary-dark '
               >
                 Sign Up
               </button>
             </div>
             <div>
               Already have an account?{' '}
-              <Link
-                to='/login'
-                className='duration-100 font-medium text-blue-600 hover:text-blue-500'
-              >
+              <Link to='/login' className='duration-100 font-medium text-blue-600 hover:text-blue-500'>
                 Login
               </Link>
             </div>

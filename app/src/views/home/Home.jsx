@@ -7,10 +7,8 @@ const Home = () => {
   // const navigate = useNavigate()
   return (
     <>
-      <div className='w-full '>
-        <Hero />
-        <BestDeals />
-      </div>
+      <Hero />
+      <BestDeals />
     </>
   )
 }

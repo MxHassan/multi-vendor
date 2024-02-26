@@ -12,14 +12,12 @@ const BestDeals = () => {
     setData(firstFive)
   }, [])
   return (
-    <div>
-      <div className='w-11/12 mx-auto'>
-        <div className={`${styles.heading}`}>
-          <Typography variant='h1'>Best Deals</Typography>
-        </div>
-        <div className='grid grid-cols-1 gap-[5px] md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 xl:gap-[30px] '>
-          {data && data.map((product, index) => <ProductCard product={product} key={index} />)}
-        </div>
+    <div className='w-11/12 mx-auto'>
+      <div className={`${styles.heading}`}>
+        <Typography variant='h1'>Best Deals</Typography>
+      </div>
+      <div className='grid grid-cols-1 gap-[5px] md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 xl:gap-[30px] '>
+        {data && data.map((product, index) => <ProductCard product={product} key={index} />)}
       </div>
     </div>
   )

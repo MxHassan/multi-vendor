@@ -7,11 +7,15 @@ const CategoriesSection = () => {
 
   return (
     <>
-      <div className='w-full hidden sm:block '>
-        <div className='branding my-12 flex justify-between w-full shadow-sm bg-white p-5 rounded-md'>
+      <div className='w-full hidden sm:block shadow-lg bg-light-background-default dark:bg-dark-background-default rounded-md '>
+        <div className='branding my-12 grid grid-cols-1 gap-[5px]  md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-4   xl:gap-[30px] w-full shadow-sm  p-5 rounded-md'>
           {brandingData &&
             brandingData.map((brand, index) => (
-              <div key={index} id='hover-rotate' className='flex items-center cursor-pointer '>
+              <div
+                key={index}
+                id='hover-rotate'
+                className='flex items-center bg-light-background-secondary dark:bg-dark-background-secondary rounded-md shadow-sm p-4 cursor-pointer '
+              >
                 {brand.icon}
                 <div className='px-3'>
                   <p className='font-bold text-sm md:text-base'>{brand.title}</p>
@@ -21,15 +25,18 @@ const CategoriesSection = () => {
             ))}
         </div>
       </div>
-      <div className='w-full bg-white p-6 rounded-lg mb-12' id='categories'>
-        <div className='grid grid-cols-1 gap-[5px] md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 xl:gap-[30px] '>
+      <div
+        className='w-full shadow-lg p-6 rounded-lg mb-12 bg-light-background-default dark:bg-dark-background-default '
+        id='categories'
+      >
+        <div className='grid grid-cols-1 gap-[5px]  md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 xl:gap-[30px] '>
           {categoriesData &&
             categoriesData.map((i) => {
               const d = i.title.toLowerCase()
               const categorieUrl = d.replace(/\s+/g, '-')
               return (
                 <Link to={`/products?category=${categorieUrl}`} key={i.id}>
-                  <div className='w-full h-[100px] flex items-center justify-between cursor-pointer overflow-hidden '>
+                  <div className='w-full h-[100px] flex items-center bg-light-background-secondary dark:bg-dark-background-secondary p-3 rounded-lg justify-between cursor-pointer overflow-hidden '>
                     <Typography variant='h5' className='leading-[1.3]'>
                       {i.title}
                     </Typography>

@@ -1,6 +1,7 @@
 import lightTheme from './src/themes/lightTheme'
 import darkTheme from './src/themes/darkTheme'
-export default {
+import withMT from '@material-tailwind/react/utils/withMT'
+export default withMT({
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
@@ -64,4 +65,4 @@ export default {
     }
   },
   plugins: []
-}
+})

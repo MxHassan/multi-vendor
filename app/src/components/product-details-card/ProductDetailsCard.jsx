@@ -4,8 +4,8 @@ import { Avatar, Button, Typography } from '@material-tailwind/react'
 const ProductDetailsCard = ({ product }) => {
   return (
     <>
-      <div className='w-full 800px:w-1/2 bg-white 800px:border-r-2 '>
-        <img alt='nature' className=' object-contain  ' src={product.image_Url[0].url} />
+      <div className='w-full 800px:w-1/2  800px:border-r-2 '>
+        <img alt='nature' className=' object-contain rounded-3xl ' src={product.image_Url[0].url} />
         <div className='mx-4'>
           <div className='w-full flex items-center gap-2 mb-2'>
             <Avatar className='object-fill' src={product.shop.shop_avatar.url} alt='' />
@@ -29,7 +29,7 @@ const ProductDetailsCard = ({ product }) => {
       </div>
       <hr className='800px:hidden border-2 my-3' />
       <div className='w-full 800px:w-1/2 800px:border-l-2  '>
-        <img alt='nature' className=' object-contain  ' src={product.image_Url[0].url} />
+        <img alt='nature' className=' object-contain rounded-3xl ' src={product.image_Url[0].url} />
         <div className='mx-4'>
           <div className='w-full flex items-center gap-2 mb-2'>
             <Avatar className='object-fill' src={product.shop.shop_avatar.url} alt='' />

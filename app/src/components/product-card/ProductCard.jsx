@@ -28,8 +28,8 @@ const ProductCard = ({ product }) => {
   const handleOpen = () => setOpen((cur) => !cur)
   return (
     <>
-      <Card className='min-h-[370px]'>
-        <CardHeader shadow={false} floated={false} className='h-[170px] mx-2'>
+      <Card className='min-h-[370px] dark:bg-dark-background-third dark:text-dark-text-secondary'>
+        <CardHeader shadow={false} floated={false} className='h-[170px] mx-2 '>
           <div className='relative h-full w-full '>
             <Link to={`/product/${productName}`}>
               <img
@@ -85,9 +85,11 @@ const ProductCard = ({ product }) => {
               </Typography>
             </div>
           </Link>
-          <Typography color='gray' className='font-medium '>
-            {product.name.length > 40 ? product.name.substring(0, 40) + '...' : product.name.substring(0, 40)}
-          </Typography>
+          <Link to={`/product/${productName}`}>
+            <Typography className='font-medium hover:text-light-text-primary hover:shadow-sm rounded-md dark:hover:text-dark-text-primary duration-200'>
+              {product.name.length > 40 ? product.name.substring(0, 40) + '...' : product.name.substring(0, 40)}
+            </Typography>
+          </Link>
         </CardBody>
         <CardFooter className='pt-0  md:px-3 800px:px-6'>
           <div className='flex items-center mb-2 '>
@@ -97,7 +99,7 @@ const ProductCard = ({ product }) => {
               // onChange={(value) => setRated(value)}
             />
           </div>
-          <div className=' flex items-center justify-between  '>
+          <div className=' flex items-center justify-between '>
             <div className='relative'>
               <p
                 color='red'
@@ -105,7 +107,7 @@ const ProductCard = ({ product }) => {
               >
                 {product?.price ? product?.price + '$' : null}
               </p>
-              <Typography color='blue-gray' className={`${styles.productDiscountPrice} mt-2`}>
+              <Typography className={`${styles.productDiscountPrice} mt-2`}>
                 {product?.price === 0 ? product?.price : product?.discount_price}$
               </Typography>
             </div>

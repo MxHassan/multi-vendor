@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Bars3BottomLeftIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
-import { categoriesData } from '../../../../static/data'
+import { categoriesData } from '../../../static/data'
 import { Link } from 'react-router-dom'
 
 const Categories = () => {

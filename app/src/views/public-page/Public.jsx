@@ -1,9 +1,11 @@
-import { Button } from '@material-tailwind/react'
+// import { Button } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
+import styles from '../../styles/styles'
+import { ArrowRightStartOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 
 const Public = () => {
   return (
-    <section className='items-center h-[80vh] justify-around flex flex-col max-w-4xl mx-auto'>
+    <section className='items-center bg-light-background-secondary dark:bg-dark-background-secondary p-5 rounded-3xl  h-[80vh] justify-around flex flex-col max-w-4xl mx-auto'>
       <header>
         <h1 className='text-4xl'>
           Welcome to <span>xMo E-Commerce</span>
@@ -11,10 +13,9 @@ const Public = () => {
       </header>
       <main className='justify-around flex flex-col max-w-4xl mx-auto'>
         <p className='text-3xl'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-          expedita voluptates ex nisi recusandae quaerat quos sit, cumque in
-          dolores corporis quibusdam reiciendis autem ipsum dolor, eius sequi
-          consectetur soluta!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur expedita voluptates ex nisi recusandae
+          quaerat quos sit, cumque in dolores corporis quibusdam reiciendis autem ipsum dolor, eius sequi consectetur
+          soluta!
         </p>
         <address className='mt-5'>
           xMo E-Commerce
@@ -31,20 +32,19 @@ const Public = () => {
       <footer>
         <div className='flex min-w-96 justify-around my-3'>
           <Link to='/login'>
-            <Button
+            <button
               color='blue'
-              className='capitalize py-2 font-medium w-40 text-base  '
+              className={`${styles.button} bg-light-primary-main dark:bg-dark-primary-dark ml-2  } `}
             >
+              <ArrowRightStartOnRectangleIcon width={20} className='mr-2 -ml-1' />
               Login
-            </Button>
+            </button>
           </Link>
           <Link to='/signup'>
-            <Button
-              className='capitalize py-2 font-medium w-40 text-base  '
-              color='blue'
-            >
+            <button className={`${styles.button} bg-light-primary-main dark:bg-dark-primary-dark ml-2  } `}>
               Sign Up
-            </Button>
+              <UserPlusIcon width={20} className='ml-2 -mr-1' />
+            </button>
           </Link>
         </div>
       </footer>

@@ -12,24 +12,24 @@ const Cart = () => {
   return (
     <>
       <CartDrawer anchor='right' open={openCart} onClose={handleCloseCart}>
-        <div className='p-4 w-[300px] '>
+        <div className='p-4 w-[300px] h-full bg-light-background-main dark:bg-dark-background-main text-light-text-primary dark:text-dark-text-primary '>
           <div className='mb-6 flex items-center justify-between'>
-            <Typography variant='h5' color='blue-gray'>
-              Material Tailwind
-            </Typography>
-            <IconButton variant='text' color='blue-gray' onClick={handleCloseCart}>
-              <XMarkIcon width={25} />
+            <Typography variant='h5'>Material Tailwind</Typography>
+            <IconButton variant='gradient' onClick={handleCloseCart}>
+              <XMarkIcon width={35} />
             </IconButton>
           </div>
-          <Typography color='gray' className='mb-8 pr-4 font-normal'>
+          <Typography className='mb-8 pr-4 font-normal'>
             Material Tailwind features multiple React and HTML components, all written with Tailwind CSS classes and
             Material Design guidelines.
           </Typography>
           <div className='flex gap-2'>
-            <Button size='sm' variant='outlined'>
+            <Button color='blue' variant='filled' size='sm'>
               Documentation
             </Button>
-            <Button size='sm'>Get Started</Button>
+            <Button variant='gradient' size='sm'>
+              Get Started
+            </Button>
           </div>
         </div>
       </CartDrawer>

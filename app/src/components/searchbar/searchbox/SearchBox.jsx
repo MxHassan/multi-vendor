@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { productData } from '../../../../static/data'
+import { productData } from '../../../static/data'
 import { Link } from 'react-router-dom'
 // import { Card, CardBody, CardHeader, Input, List, ListItem, Typography } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import styles from '../../../../styles/styles'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
