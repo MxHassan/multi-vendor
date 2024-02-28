@@ -59,17 +59,23 @@ const createUser = asyncHandler(async (req, res) => {
       password: password,
       avatar: fileUrl
     };
+    // const createdUser = await User.create(user);
     try {
       // creating activation token and sending email to the user
       const activationToken = createActivationToken(user);
       const activationUrl = `${process.env.APP_URL}/activation/${activationToken}`;
+      // console.log(activationUrl);
       await sendMail({
         email: user.email,
         subject: 'Activate your account',
         message: `Hello ${user.firstName},\nplease click on the link to activate your account: ${activationUrl}`
-      }).then(() => {
-        res.status(201).json({ success: true, message: `please check your email: ${user.email} to activate your account`, activationUrl });
-      });
+      })
+        .then(() => {
+          res
+            .status(201)
+            .json({ success: true, message: `please check your email: ${user.email} to activate your account`, activationUrl });
+        })
+        .catch((err) => console.log(err));
     } catch (err) {
       return res.status(500).json({ message: `from small trycatch ${err.message}` });
     }

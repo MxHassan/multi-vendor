@@ -1,12 +1,15 @@
-import { RouterProvider } from 'react-router-dom'
+import { RouterProvider, useLocation } from 'react-router-dom'
 import router from './routes/index.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentTheme } from './features/theme/themeSlice.js'
 // import { useEffect } from 'react'
 // import axiosApi from './api/axios.js'
 // import { GET_USER_URL } from './constants.js'
 
 function App() {
+  const theme = useSelector(selectCurrentTheme)
   // useEffect(() => {
   //   const getUser = async () => {
   //     await axiosApi.get(GET_USER_URL).then((res) => {
@@ -29,7 +32,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='colored'
+        theme={theme ? 'dark' : 'light'}
       />
     </>
   )

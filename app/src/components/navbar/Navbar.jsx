@@ -12,8 +12,8 @@ import {
 } from '../../features/nav/navSlice'
 import { Bars3Icon, HeartIcon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import NavLinks from './navlinks/NavLinks'
+// import NavLinksCopy from './navlinks/NavLinksCopy'
 import ProfileMenu from './profilemenu/ProfileMenu'
-import Switcher from '../theme-toggler/Switcher'
 const NavbarTop = () => {
   const navActive = useSelector(selectNavActive)
   const mobileNav = useSelector(selectMobileNav)
@@ -30,7 +30,7 @@ const NavbarTop = () => {
         navActive && 'fixed top-0 left-0 z-10  '
       } duration-300 p-0 flex h-[70px] w-full dark:bg-blue-900 bg-amber-500`}
     >
-      <div className={` ${styles.section} flex items-center justify-between`}>
+      <div className={` w-full px-4 flex items-center justify-between`}>
         <IconButton
           className={`1000px:hidden  bg-light-background-secondary dark:bg-dark-background-secondary text-light-common-black dark:text-dark-common-white duration-200 `}
           onClick={() => {
@@ -42,12 +42,11 @@ const NavbarTop = () => {
         <div className='hidden 1000px:flex '>
           <Categories />
         </div>
-        <div className='hidden sm:flex mx-auto '>
+        <div className='hidden sm:flex mx-auto  '>
           <NavLinks />
+          {/* <NavLinksCopy /> */}
         </div>
-        <div className='flex items-center'>
-          {navActive && <Switcher />}
-
+        <div className='flex items-center gap-4'>
           <div className='hidden 800px:flex items-center gap-4'>
             <Badge color='green' content='3'>
               <Button variant='text' className={`${styles.iconButton}  text-white `} onClick={handleOpenCart}>
@@ -59,8 +58,8 @@ const NavbarTop = () => {
                 <HeartIcon width={35} />
               </Button>
             </Badge>
-            <ProfileMenu />
           </div>
+          <ProfileMenu />
         </div>
       </div>
     </div>

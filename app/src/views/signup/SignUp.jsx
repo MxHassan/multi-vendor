@@ -4,8 +4,9 @@ import { toast } from 'react-toastify'
 import axiosApi from '../../api/axios'
 import { ValidiateProps } from '../../utils/validation'
 import { REGISTER_URL } from '../../constants'
-import { Avatar, Checkbox, Input, Typography } from '@material-tailwind/react'
-import { UserCircleIcon } from '@heroicons/react/24/outline'
+import { Avatar, Button, Checkbox, Input, Typography } from '@material-tailwind/react'
+import { CloudArrowUpIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Button as MuiButton } from '@mui/material'
 const SignUp = () => {
   // const navigate = useNavigate();
   const [firstName, setFirstName] = useState('')
@@ -150,28 +151,36 @@ const SignUp = () => {
     }
   }
   return (
-    <div className='min-w-96 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-light-background-main dark:bg-dark-background-main'>
+    <div className='min-w-96 flex-col justify-center py-12 sm:px-6 lg:px-8 duration-300 '>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
         <h2 className='mt-6 text-center text-3xl font-extrabold '>Sign Up a new account</h2>
       </div>
       <div className='mt-8 sm:mx-auto max-sm:w-full sm:max-w-lg bg-light-background-secondary dark:bg-dark-background-secondary rounded-lg'>
-        <div className=' p-8 shadow sm:rounded-lg sm:px-10'>
+        <div className=' p-8 shadow sm:rounded-lg sm:px-10  '>
           <form noValidate onSubmit={handleSubmit} className='space-y-6'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between '>
               <div className=' mr-2'>
                 <label htmlFor='firstName' className='block text-sm font-medium '>
                   First Name
                 </label>
                 <div className='mt-1'>
-                  <input
-                    className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
+                  <Input
+                    placeholder='John'
+                    size='lg'
                     type='text'
                     name='firstName'
                     id='firstName'
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    autoComplete='name'
                     required
+                    autoComplete='name'
+                    className=' !border-light-text-secondary duration-0 text-inherit focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main animate-fade-in dark:bg-dark-background-main rounded-lg'
+                    }}
                   />
                 </div>
               </div>
@@ -180,8 +189,9 @@ const SignUp = () => {
                   Last Name
                 </label>
                 <div className='mt-1'>
-                  <input
-                    className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
+                  <Input
+                    placeholder='Deo'
+                    size='lg'
                     type='text'
                     name='lastName'
                     id='lastName'
@@ -189,6 +199,13 @@ const SignUp = () => {
                     onChange={(e) => setLastName(e.target.value)}
                     autoComplete='name'
                     required
+                    className=' !border-light-text-secondary text-inherit duration-0 focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main  dark:bg-dark-background-main rounded-lg'
+                    }}
                   />
                 </div>
               </div>
@@ -200,7 +217,7 @@ const SignUp = () => {
                 </label>
                 <div className='mt-1'>
                   <Input
-                    color='blue'
+                    // color='blue'
                     placeholder={input.placeholder}
                     size='lg'
                     type={input.type}
@@ -210,18 +227,28 @@ const SignUp = () => {
                     onChange={onChange}
                     autoComplete={input.id}
                     error={errors[input.name]}
-                    className='bg-light-background-default '
+                    className=' !border-light-text-secondary text-inherit duration-0 focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main  dark:bg-dark-background-main rounded-lg'
+                    }}
                   />
-                  {errors[input.name] && <p className='p-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>}
+                  {errors[input.name] && (
+                    <p className='p-1 animate-fade-in mt-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>
+                  )}
                 </div>
               </div>
             ))}
-            {matchError && <p className='p-1 text-xs text-red-700 opacity-75'>Passwords Don&apos;t match</p>}
+            {matchError && (
+              <p className='p-1 text-xs animate-fade-in text-red-700 opacity-75'>Passwords Don&apos;t match</p>
+            )}
             <Checkbox
               color='indigo'
               onClick={() => setShowPassword(!showPassword)}
               id='showPassword'
-              className='bg-light-background-default'
+              className='bg-light-background-main'
               label={
                 <Typography className='flex items-center text-light-common-black dark:text-dark-common-white font-normal'>
                   Show Password
@@ -235,14 +262,19 @@ const SignUp = () => {
                   {avatar ? (
                     <Avatar className='w-full h-full' src={URL.createObjectURL(avatar)} />
                   ) : (
-                    <UserCircleIcon className='w-fit h-fit' />
+                    <UserCircleIcon className='w-fit h-fit text-inherit' />
                   )}
                 </div>
-                <label
-                  htmlFor='file-input'
-                  className='duration-100 ml-4 bg-light-background-default dark:bg-dark-background-main cursor-pointer flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium '
+
+                <MuiButton
+                  sx={{ textTransform: 'none', borderRadius: 5, ml: 1.5 }}
+                  startIcon={<CloudArrowUpIcon width={30} />}
+                  tabIndex={-1}
+                  variant='contained'
+                  color='primary'
+                  component='label'
                 >
-                  <span>Upload File</span>
+                  Upload File
                   <input
                     type='file'
                     name='avatar'
@@ -251,17 +283,20 @@ const SignUp = () => {
                     accept='image/*'
                     onChange={(e) => setAvatar(e.target.files[0])}
                   />
-                </label>
+                </MuiButton>
               </div>
             </div>
             <div>
-              <button
+              <Button
                 type='submit'
                 disabled={disabled}
-                className='duration-300 disabled:hover:cursor-not-allowed disabled:bg-gray-400 relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-[4px]  bg-light-primary-main dark:bg-dark-primary-dark hover:bg-light-primary-light hover:hover:bg-light-primary-dark '
+                color='indigo'
+                variant='gradient'
+                fullWidth
+                className='capitalize duration-200 text-base'
               >
                 Sign Up
-              </button>
+              </Button>
             </div>
             <div>
               Already have an account?{' '}

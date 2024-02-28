@@ -14,7 +14,7 @@ require('dotenv').config();
 // middleware
 app.use(logger);
 app.use(cors(corsOptions));
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));

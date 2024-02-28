@@ -1,8 +1,11 @@
 import { Tab, Tabs, TabsHeader } from '@material-tailwind/react'
 import { useNavigate } from 'react-router-dom'
 import { navItems } from '../../../static/data'
+// import { useSelector } from 'react-redux'
+// import { selectNavLinkValue } from '../../../features/nav/navSlice'
 const NavLinks = () => {
   const navigate = useNavigate()
+  // const tabValue = useSelector(selectNavLinkValue)
   return (
     <Tabs value={location.pathname.split('/')[1] === '' ? 'home' : location.pathname.split('/')[1]}>
       <TabsHeader

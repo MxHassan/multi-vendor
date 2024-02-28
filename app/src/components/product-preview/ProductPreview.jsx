@@ -7,7 +7,7 @@ const ProductPreview = ({ open, handleOpen, product }) => {
   const ref = useRef()
   return (
     <Dialog
-      size='xl'
+      size='lg'
       className='bg-light-background-secondary dark:bg-dark-background-secondary'
       open={open}
       handler={handleOpen}
@@ -28,7 +28,7 @@ const ProductPreview = ({ open, handleOpen, product }) => {
           </IconButton>
         </div>
       </DialogHeader>
-      <DialogBody className=' 800px:flex overflow-scroll  p-2 small-scrollbar preview-scrollbar h-[90vh] 800px:h-[70vh]  overflow-x-hidden '>
+      <DialogBody className=' 800px:flex overflow-scroll text-light-text-primary dark:text-dark-text-primary p-2 small-scrollbar preview-scrollbar h-[90vh] 800px:h-[70vh]  overflow-x-hidden '>
         <ProductDetailsCard product={product} />
       </DialogBody>
     </Dialog>

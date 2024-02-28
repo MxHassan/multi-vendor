@@ -1,14 +1,12 @@
 import { brandingData, categoriesData } from '../../../static/data'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Typography } from '@material-tailwind/react'
 
 const CategoriesSection = () => {
-  const navigate = useNavigate()
-
   return (
     <>
-      <div className='w-full hidden sm:block shadow-lg bg-light-background-default dark:bg-dark-background-default rounded-md '>
-        <div className='branding my-12 grid grid-cols-1 gap-[5px]  md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-4   xl:gap-[30px] w-full shadow-sm  p-5 rounded-md'>
+      <div className='sm:w-11/12 mx-auto md:w-full hidden 400px:block shadow-lg bg-light-background-default dark:bg-dark-background-default rounded-md '>
+        <div className='branding my-12 grid grid-cols-1 max-w-[400px] mx-auto md:max-w-full md:mx-0 gap-[20px]  md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-7 xl:grid-cols-4 xl:gap-[30px]  shadow-sm  p-5 rounded-md'>
           {brandingData &&
             brandingData.map((brand, index) => (
               <div
@@ -26,10 +24,10 @@ const CategoriesSection = () => {
         </div>
       </div>
       <div
-        className='w-full shadow-lg p-6 rounded-lg mb-12 bg-light-background-default dark:bg-dark-background-default '
+        className='sm:w-11/12 mx-auto md:w-full shadow-lg p-6 rounded-lg mb-12 bg-light-background-default dark:bg-dark-background-default '
         id='categories'
       >
-        <div className='grid grid-cols-1 gap-[5px]  md:grid-cols-2 md:gap-[10px] lg:grid-cols-4 lg:gap-5 xl:grid-cols-5 xl:gap-[30px] '>
+        <div className='grid grid-cols-1 max-w-[400px] mx-auto md:max-w-full md:mx-0 gap-[20px]  md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-7 xl:grid-cols-5 xl:gap-[30px]'>
           {categoriesData &&
             categoriesData.map((i) => {
               const d = i.title.toLowerCase()

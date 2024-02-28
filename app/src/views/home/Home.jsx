@@ -2,6 +2,7 @@
 
 import Hero from '../../components/Route/Hero/Hero'
 import BestDeals from '../../components/Route/best-deals/BestDeals'
+import FeaturedProducts from '../../components/Route/featured-products/FeaturedProducts'
 
 const Home = () => {
   // const navigate = useNavigate()
@@ -9,6 +10,7 @@ const Home = () => {
     <>
       <Hero />
       <BestDeals />
+      <FeaturedProducts />
     </>
   )
 }

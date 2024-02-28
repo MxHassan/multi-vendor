@@ -56,7 +56,7 @@ export default {
     A700: '#616161'
   },
   text: {
-    primary: '#fff',
+    primary: 'rgba(255,255,255,0.9)',
     secondary: 'rgba(255,255,255,0.7)',
     disabled: 'rgba(255,255,255,0.5)',
     icon: 'rgba(255,255,255,0.5)'

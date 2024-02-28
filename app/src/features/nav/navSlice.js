@@ -22,16 +22,16 @@ const navSlice = createSlice({
     setNavActive: (state, action) => {
       state.navActive = action.payload
     },
-    setOpenCart: (state, action) => {
+    setOpenCart: (state) => {
       state.openCart = true
     },
-    setCloseCart: (state, action) => {
+    setCloseCart: (state) => {
       state.openCart = false
     },
-    setOpenWishlist: (state, action) => {
+    setOpenWishlist: (state) => {
       state.openWishlist = true
     },
-    setCloseWishlist: (state, action) => {
+    setCloseWishlist: (state) => {
       state.openWishlist = false
     }
   }

@@ -8,6 +8,7 @@ import { setCredentials } from '../../features/auth/authSlice'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
 import { Dialog, Spinner } from '@material-tailwind/react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { Backdrop, CircularProgress } from '@mui/material'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -44,14 +45,22 @@ const Login = () => {
       if (!err?.status) toast.error('No Server Response')
       else if (err.status === 400) toast.error('Missing Username Or Password')
       else if (err.status === 401) toast.error('Unauthorized')
-      else toast.error(err.data.message)
+      else toast.error('No Server Response')
+      // else toast.error(err.data.message)
     }
   }
   if (isLoading) {
     return (
-      <Dialog open={isLoading} className='bg-transparent flex justify-center shadow-none'>
-        <Spinner color='blue' className='w-8' />
-      </Dialog>
+      // <Dialog open={isLoading} className='bg-transparent  flex justify-center shadow-none'>
+      //   <Spinner color='blue' className='h-14 w-14 text-light-grey-900/20 dark:text-light-grey-400' />
+      // </Dialog>
+      <Backdrop open={isLoading}>
+        {/* <CircularProgress color='primary' /> */}
+        <Spinner
+          color='blue'
+          className='h-14 w-14 animate-fade-in text-light-grey-900/50 dark:text-light-grey-400/50'
+        />
+      </Backdrop>
     )
   }
   return (

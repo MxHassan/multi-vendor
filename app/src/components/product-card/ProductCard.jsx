@@ -4,20 +4,12 @@ import {
   HeartIcon as FilledHeartIcon,
   ShoppingCartIcon as FilledShoppingCartIcon
 } from '@heroicons/react/24/solid'
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  IconButton,
-  Rating,
-  Tooltip
-} from '@material-tailwind/react'
+import { Card, CardHeader, CardBody, CardFooter, Typography, IconButton, Tooltip } from '@material-tailwind/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../../styles/styles'
 import ProductPreview from '../product-preview/ProductPreview'
+import { Rating } from '@mui/material'
 
 const ProductCard = ({ product }) => {
   const [wishlisted, setWishlisted] = useState(false)
@@ -28,7 +20,7 @@ const ProductCard = ({ product }) => {
   const handleOpen = () => setOpen((cur) => !cur)
   return (
     <>
-      <Card className='min-h-[370px] dark:bg-dark-background-third dark:text-dark-text-secondary'>
+      <Card className='min-h-[370px] bg-light-background-main dark:bg-dark-background-secondary dark:text-dark-text-primary'>
         <CardHeader shadow={false} floated={false} className='h-[170px] mx-2 '>
           <div className='relative h-full w-full '>
             <Link to={`/product/${productName}`}>
@@ -94,8 +86,9 @@ const ProductCard = ({ product }) => {
         <CardFooter className='pt-0  md:px-3 800px:px-6'>
           <div className='flex items-center mb-2 '>
             <Rating
-              value={product.rating}
-              readonly
+              defaultValue={product.rating}
+              readOnly
+              precision={0.5}
               // onChange={(value) => setRated(value)}
             />
           </div>
