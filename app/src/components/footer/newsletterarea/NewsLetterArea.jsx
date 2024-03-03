@@ -1,22 +1,36 @@
+import { Button, Input } from '@material-tailwind/react'
+import { useState } from 'react'
+
 const NewsLetterArea = () => {
+  const [email, setEmail] = useState('')
   return (
-    <div className='bg-indigo-600  md:flex md:justify-between py-7 px-4 sm:px-12 md:items-center'>
+    <div className='bg-indigo-600 text-light-text-primary dark:text-dark-text-primary md:flex  py-7 px-4 sm:px-12 md:items-center '>
       <h1 className='lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold md:w-2/5'>
-        <span className='text-[#56d879]'>Subscribe</span> to get news events and
-        offers!
+        <span className='text-[#56d879]'>Subscribe</span> to get news events and offers!
       </h1>
-      <div className='items-center max-md:flex max-md:flex-col'>
-        <input
-          className='text-gray-800 max-lg:mb-4 w-2/3 md:w-72 py-2.5 rounded px-2 focus:outline-none  md:mr-5 '
-          type='text'
+      <div className='items-center justify-center block md:flex md:flex-col md:w-3/5 lg:flex-row md:gap-5 gap-2 '>
+        <Input
+          placeholder='Email Address'
+          size='lg'
+          type='email'
+          name='email'
+          id='newsLetterEmail'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete='email'
           required
-          placeholder='Enter your email'
-          name='newsletterEmail'
-          id='newsletterEmail'
+          className=' !border-light-text-secondary  py-2.5 px-2  text-inherit  focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+          labelProps={{
+            className: 'hidden'
+          }}
+          containerProps={{
+            className:
+              'bg-light-background-main w-full md:w-9/12 xl:w-1/2 mb-4 md:mb-0  dark:bg-dark-background-main rounded-lg'
+          }}
         />
-        <button className='bg-[#56d879] hover:bg-teal-500 duration-300 px-5 py-2.5 rounded-md text-white md:w-auto w-2/3'>
+        <Button color='green' className='capitalize  text-base w-full md:w-1/3 lg:w-1/5 '>
           Submit
-        </button>
+        </Button>
       </div>
     </div>
   )

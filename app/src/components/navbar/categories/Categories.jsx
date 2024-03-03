@@ -23,10 +23,12 @@ const Categories = () => {
         {categoriesData && dropDown && (
           <div className='p-2 focus:outline-none max-h-[40vh] overflow-scroll bg-light-background-secondary dark:bg-dark-background-secondary overflow-x-hidden small-scrollbar z-10 w-full absolute left-0 top-14 mt-1 animate-fade-in '>
             {categoriesData.map((categorie, index) => {
-              const d = categorie.title.toLowerCase()
-              const categorieUrl = d.replace(/\s+/g, '-')
+              {
+                /* const d = categorie.title.toLowerCase() */
+              }
+              const categorieUrl = categorie.title.replace(/\s+/g, '-')
               return (
-                <Link key={index} to={`/categories/${categorieUrl}`}>
+                <Link onClick={handleDropMenu} key={index} to={`/products?category=${categorieUrl}`}>
                   <div
                     className='p-0 flex items-center gap-3 mt-1 bg-light-background-third dark:bg-dark-background-third hover:scale-[1.05] duration-300'
                     key={index}

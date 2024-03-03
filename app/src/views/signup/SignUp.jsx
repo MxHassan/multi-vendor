@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import axiosApi from '../../api/axios'
@@ -7,8 +7,11 @@ import { REGISTER_URL } from '../../constants'
 import { Avatar, Button, Checkbox, Input, Typography } from '@material-tailwind/react'
 import { CloudArrowUpIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Button as MuiButton } from '@mui/material'
+import { useSignupMutation } from '../../features/auth/authApiSlice'
+import Loader from '../../components/loader/Loader'
 const SignUp = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate()
+  // const [signup, { data: signupData, isSuccess, isLoading, isError, error }] = useSignupMutation()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [avatar, setAvatar] = useState(null)
@@ -115,23 +118,29 @@ const SignUp = () => {
     }
   }, [values, errors, matchError, firstName, lastName, avatar])
 
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     navigate('/login')
+  //   }
+  // }, [isSuccess, navigate])
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let formData = new FormData()
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
-    formData.append('email', values.email)
-    formData.append('password', values.password)
-    formData.append('confirmPassword', values.confirmPassword)
-    formData.append('file', avatar)
+    let bodyFormData = new FormData()
+    bodyFormData.append('firstName', firstName)
+    bodyFormData.append('lastName', lastName)
+    bodyFormData.append('email', values.email)
+    bodyFormData.append('password', values.password)
+    bodyFormData.append('confirmPassword', values.confirmPassword)
+    bodyFormData.append('file', avatar)
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     }
     try {
-      const res = await axiosApi.post(REGISTER_URL, formData, config)
-      if (res.data.success === true) {
+      const res = await axiosApi.post(REGISTER_URL, bodyFormData, config)
+      // const res = await signup(avatar).unwrap()
+      if (res?.data?.success) {
         toast.success(res.data.message)
         setFirstName('')
         setLastName('')
@@ -150,6 +159,7 @@ const SignUp = () => {
       }
     }
   }
+  // if (isLoading) return <Loader isLoading={isLoading} />
   return (
     <div className='min-w-96 flex-col justify-center py-12 sm:px-6 lg:px-8 duration-300 '>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
@@ -246,6 +256,7 @@ const SignUp = () => {
             )}
             <Checkbox
               color='indigo'
+              defaultValue={showPassword}
               onClick={() => setShowPassword(!showPassword)}
               id='showPassword'
               className='bg-light-background-main'

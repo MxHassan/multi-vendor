@@ -15,8 +15,8 @@ const ProductCard = ({ product }) => {
   const [wishlisted, setWishlisted] = useState(false)
   const [addCart, setAddCart] = useState(false)
   const [open, setOpen] = useState(false)
-  const d = product.name.toLowerCase()
-  const productName = d.replace(/\s+/g, '-')
+  // const d = product.name.toLowerCase()
+  const productName = product?.name.replace(/\s+/g, '-')
   const handleOpen = () => setOpen((cur) => !cur)
   return (
     <>
@@ -87,6 +87,7 @@ const ProductCard = ({ product }) => {
           <div className='flex items-center mb-2 '>
             <Rating
               defaultValue={product.rating}
+              value={product.rating}
               readOnly
               precision={0.5}
               // onChange={(value) => setRated(value)}

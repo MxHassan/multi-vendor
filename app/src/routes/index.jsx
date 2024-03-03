@@ -12,6 +12,10 @@ import Events from '../views/events/Events.jsx'
 import BestSelling from '../views/best-selling/BestSelling.jsx'
 import Products from '../views/products/Products.jsx'
 import Faq from '../views/faq/FAQ.jsx'
+import ProductDetails from '../views/product-details/ProductDetails.jsx'
+import Profile from '../views/profile/Profile.jsx'
+// import CategoriesSection from '../components/Route/catagoriessection/CategoriesSection.jsx'
+// import Categories from '../views/categories/Categories.jsx'
 // import ProtectedRoutes from './ProtectedRoutes.jsx'
 
 const router = createBrowserRouter(
@@ -29,9 +33,13 @@ const router = createBrowserRouter(
         <Route path='/' element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path='best-selling' element={<BestSelling />} />
+          {/* <Route path='categories' element={<CategoriesSection />} /> */}
+          {/* <Route path='categories/:category' element={<Categories />} /> */}
           <Route path='products' element={<Products />} />
+          <Route path='product/:productName' element={<ProductDetails />} />
           <Route path='events' element={<Events />} />
           <Route path='faq' element={<Faq />} />
+          <Route path='profile' element={<Profile />} />
         </Route>
         {/* </Route> */}
       </Route>

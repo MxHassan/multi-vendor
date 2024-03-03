@@ -11,6 +11,7 @@ const ActivationPage = () => {
   const [error, setError] = useState(null)
   const [response, setResponse] = useState(null)
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (activationToken) {
       const activationEmail = async () => {
         await axios

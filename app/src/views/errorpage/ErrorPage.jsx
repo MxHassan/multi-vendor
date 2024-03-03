@@ -5,6 +5,7 @@ import { HomeIcon } from '@heroicons/react/24/outline'
 
 export default function ErrorPage() {
   // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  window.scrollTo(0, 0)
   const navigate = useNavigate()
   const error = useRouteError()
   console.error(error)

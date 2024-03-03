@@ -10,7 +10,7 @@ const CarouselWithActions = () => {
     <Carousel
       transition={{ duration: 0.7, ease: 'anticipate' }}
       autoplay={true}
-      autoplayDelay={5 * 1000}
+      autoplayDelay={10 * 1000}
       loop={true}
       className={`rounded-b-lg h-[calc(80vh-160px)] 800px:h-[calc(90vh-160px)] bg-no-repeat mb-[20vh] 800px:mb-[10vh]  ${
         navActive && 'mt-[70px]'

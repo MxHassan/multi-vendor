@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
-// import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import styles from '../../styles/styles'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/auth/authSlice'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
-import { Dialog, Spinner } from '@material-tailwind/react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { Backdrop, CircularProgress } from '@mui/material'
+import Loader from '../../components/loader/Loader'
 
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [login, { isLoading }] = useLoginMutation()
+  const [login, { isLoading, isSuccess }] = useLoginMutation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [visible, setVisible] = useState()
   const [disabled, setDisabled] = useState(true)
+  useEffect(() => {
+    isSuccess && navigate('/')
+  }, [isSuccess, navigate])
   useEffect(() => {
     if (!email || !password) setDisabled(true)
     else setDisabled(false)
@@ -39,7 +40,7 @@ const Login = () => {
       setPassword('')
       setVisible(false)
       toast.success(res.message)
-      navigate('/')
+
       // console.log(userRes.data.user)
     } catch (err) {
       if (!err?.status) toast.error('No Server Response')
@@ -50,18 +51,7 @@ const Login = () => {
     }
   }
   if (isLoading) {
-    return (
-      // <Dialog open={isLoading} className='bg-transparent  flex justify-center shadow-none'>
-      //   <Spinner color='blue' className='h-14 w-14 text-light-grey-900/20 dark:text-light-grey-400' />
-      // </Dialog>
-      <Backdrop open={isLoading}>
-        {/* <CircularProgress color='primary' /> */}
-        <Spinner
-          color='blue'
-          className='h-14 w-14 animate-fade-in text-light-grey-900/50 dark:text-light-grey-400/50'
-        />
-      </Backdrop>
-    )
+    return <Loader isLoading={isLoading} />
   }
   return (
     <div className='flex-col  justify-center py-12 sm:px-6 lg:px-8'>

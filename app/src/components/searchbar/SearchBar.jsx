@@ -12,8 +12,8 @@ const SearchBar = () => {
     dispatch(toggleThemeMode())
   }
   return (
-    <div className={' dark:bg-dark-background-default w-full duration-200 py-5'}>
-      <div className=' hidden w-11/12 mx-auto 800px:h-[50px] 800px:flex items-center justify-between'>
+    <div className='hidden 800px:flex dark:bg-dark-background-default w-full duration-200 py-5'>
+      <div className=' w-11/12 mx-auto h-[50px] flex items-center justify-between'>
         {/* logo */}
         <Link to='/'>
           <img

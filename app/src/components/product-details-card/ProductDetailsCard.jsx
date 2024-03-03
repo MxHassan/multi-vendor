@@ -9,8 +9,14 @@ import { HeartIcon as FilledHeartIcon } from '@heroicons/react/24/solid'
 import { Avatar, Button, IconButton, Typography } from '@material-tailwind/react'
 import styles from '../../styles/styles'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { productData } from '../../static/data'
 
-const ProductDetailsCard = ({ product }) => {
+const ProductDetailsCard = (props) => {
+  const { productName } = useParams()
+  const product_name = productName?.replace(/-/g, ' ')
+  const foundProduct = productData.filter((product) => product.name === product_name)
+  const product = props.product || foundProduct[0]
   const [wishlisted, setWishlisted] = useState(false)
   const [count, setCount] = useState(1)
   const handleIncrement = () => {
@@ -30,9 +36,9 @@ const ProductDetailsCard = ({ product }) => {
   return (
     <>
       {/* product preview */}
-      <div className='w-full 800px:w-1/2  800px:border-r-2 '>
+      <div className='w-full 800px:w-1/2  800px:border-r-2 border-r-light-background-third '>
         <div className='flex justify-center'>
-          <img alt='nature' className=' object-contain rounded-3xl ' src={product.image_Url[0].url} />
+          <img alt='nature' className=' object-cover h-[50vh] rounded-3xl ' src={product.image_Url[0].url} />
         </div>
         <div className='mt-5 ml-5'>
           <div className='w-full flex items-center gap-2 mb-2'>
@@ -61,9 +67,9 @@ const ProductDetailsCard = ({ product }) => {
           </Typography>
         </div>
       </div>
-      <hr className='800px:hidden border-2 my-3' />
+      <hr className='800px:hidden border-light-background-third border-2 my-3' />
       {/* product details */}
-      <div className='w-full 800px:w-1/2 800px:border-l-2  '>
+      <div className='w-full 800px:w-1/2 800px:border-l-2 border-l-light-background-third  '>
         <div className=' flex items-start flex-col gap-2 p-8'>
           <Typography className='text-inherit' variant='h4'>
             {product.name}

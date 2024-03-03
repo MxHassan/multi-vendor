@@ -1,7 +1,8 @@
 // import { Button } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
 import styles from '../../styles/styles'
-import { ArrowRightStartOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
+import { ArrowRightEndOnRectangleIcon, ArrowRightStartOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
+import { Button } from '@material-tailwind/react'
 
 const Public = () => {
   return (
@@ -32,19 +33,22 @@ const Public = () => {
       <footer>
         <div className='flex min-w-96 justify-around my-3'>
           <Link to='/login'>
-            <button
+            <Button
               color='blue'
-              className={`${styles.button} bg-light-primary-main dark:bg-dark-primary-dark ml-2  } `}
+              className={` flex items-center capitalize text-base font-Poppins bg-light-primary-main dark:bg-dark-primary-dark ml-2  } `}
             >
-              <ArrowRightStartOnRectangleIcon width={20} className='mr-2 -ml-1' />
+              <ArrowRightEndOnRectangleIcon width={25} className='mr-2 -ml-1' />
               Login
-            </button>
+            </Button>
           </Link>
           <Link to='/signup'>
-            <button className={`${styles.button} bg-light-primary-main dark:bg-dark-primary-dark ml-2  } `}>
+            <Button
+              color='blue'
+              className={` flex items-center capitalize text-base font-Poppins bg-light-primary-main dark:bg-dark-primary-dark ml-2  } `}
+            >
               Sign Up
-              <UserPlusIcon width={20} className='ml-2 -mr-1' />
-            </button>
+              <UserPlusIcon width={25} className='ml-2 -mr-1' />
+            </Button>
           </Link>
         </div>
       </footer>

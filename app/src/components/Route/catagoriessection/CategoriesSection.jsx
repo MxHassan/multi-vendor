@@ -30,8 +30,10 @@ const CategoriesSection = () => {
         <div className='grid grid-cols-1 max-w-[400px] mx-auto md:max-w-full md:mx-0 gap-[20px]  md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-7 xl:grid-cols-5 xl:gap-[30px]'>
           {categoriesData &&
             categoriesData.map((i) => {
-              const d = i.title.toLowerCase()
-              const categorieUrl = d.replace(/\s+/g, '-')
+              {
+                /* const d = i.title.toLowerCase() */
+              }
+              const categorieUrl = i.title.replace(/\s+/g, '-')
               return (
                 <Link to={`/products?category=${categorieUrl}`} key={i.id}>
                   <div className='w-full h-[100px] flex items-center bg-light-background-secondary dark:bg-dark-background-secondary p-3 rounded-lg justify-between cursor-pointer overflow-hidden '>

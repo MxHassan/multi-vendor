@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { productData } from '../../../static/data'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // import { Card, CardBody, CardHeader, Input, List, ListItem, Typography } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { Button } from '@material-tailwind/react'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchData, setSearchData] = useState([])
   const [searchActive, setSearchActive] = useState(null)
+  const navigate = useNavigate()
 
   const handleSearchChange = (e) => {
     const term = e.target.value
@@ -30,7 +32,9 @@ const Search = () => {
             if (!searchActive) setSearchActive(true)
           }}
           onBlur={() => {
-            if (searchActive) setSearchActive(false)
+            setTimeout(() => {
+              if (searchActive) setSearchActive(false)
+            }, 200)
           }}
           type='search'
           className='h-10  pl-10 pr-2 bg-light-background-secondary  dark:bg-dark-background-secondary  dark:text-dark-text-primary placeholder:opacity-0  dark:placeholder:text-white rounded-lg hover:w-[80%] hover:placeholder:opacity-50 focus:placeholder:opacity-100 focus:w-full duration-500 mx-auto placeholder:text-gray-600 focus:bg-light-background-paper dark:focus:bg-dark-background-third 1300px:w-[300px] 1100px:w-[200px] 800px:w-32  '
@@ -42,7 +46,7 @@ const Search = () => {
           // }}
         />
       </div>
-      {searchData && searchTerm !== '' && searchData.length !== 0 && (
+      {searchData && searchActive && searchTerm !== '' && searchData.length !== 0 && (
         <div className='absolute mt-1 w-full z-20 '>
           <div
             className={` mx-auto w-11/12  bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary  small-scrollbar rounded-[4px] px-2 py-1 1000px:px-4  max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
@@ -51,18 +55,30 @@ const Search = () => {
               const d = i.name
               const Product_name = d.replace(/\s+/g, '-')
               return (
-                <Link key={index} to={`/product/${Product_name}`}>
+                <Button
+                  className='capitalize text-base text-inherit'
+                  variant='text'
+                  size='sm'
+                  onClick={() => {
+                    setSearchActive(false)
+                    setSearchTerm('')
+                    navigate(`/product/${Product_name}`)
+                  }}
+                  fullWidth
+                  key={index}
+                  to={`/product/${Product_name}`}
+                >
                   <div className='my-1 p-0 hover:scale-[1.05] duration-300 '>
                     <div className='w-full rounded-md h-[80px] flex gap-4 items-center'>
                       <div className='m-0 1000px:w-20 w-16 shrink-0  '>
                         <img src={i.image_Url[0].url} alt='' className='w-full h-full object-cover rounded-lg ' />
                       </div>
                       <div>
-                        <p className='font-medium'>{i.name}</p>
+                        <p className='font-normal'>{i.name}</p>
                       </div>
                     </div>
                   </div>
-                </Link>
+                </Button>
               )
             })}
           </div>
