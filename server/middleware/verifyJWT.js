@@ -21,7 +21,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
   const token = authHeader.split(' ')[1];
   // console.log(token);
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    if (err) return res.status(403).json({ message: 'Forbidden from middleware' });
+    if (err) return res.status(403).json({ message: 'Forbidden. Unauthorized' });
     req.userId = decoded.userInfo.id;
     req.role = decoded.userInfo.role;
     next();

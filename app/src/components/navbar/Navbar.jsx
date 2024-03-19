@@ -14,6 +14,7 @@ import { Bars3Icon, HeartIcon, ShoppingCartIcon, XMarkIcon } from '@heroicons/re
 import NavLinks from './navlinks/NavLinks'
 // import NavLinksCopy from './navlinks/NavLinksCopy'
 import ProfileMenu from './profilemenu/ProfileMenu'
+import CategoriesButton from './categories/CategoriesButton'
 const NavbarTop = () => {
   const navActive = useSelector(selectNavActive)
   const mobileNav = useSelector(selectMobileNav)
@@ -27,8 +28,8 @@ const NavbarTop = () => {
   return (
     <div
       className={`${
-        navActive && 'fixed top-0 left-0 z-10  '
-      } duration-300 p-0 flex h-[70px] w-full dark:bg-blue-900 bg-amber-500`}
+        navActive && 'fixed 800px:fixed top-0 left-0   '
+      } duration-300 p-0 fixed 800px:static flex z-10 h-[70px] w-full dark:bg-blue-900 bg-amber-500`}
     >
       <div className={` w-full px-4 flex items-center justify-between`}>
         <IconButton
@@ -40,7 +41,7 @@ const NavbarTop = () => {
           {mobileNav ? <XMarkIcon width={30} /> : <Bars3Icon width={30} />}
         </IconButton>
         <div className='hidden 1000px:flex '>
-          <Categories />
+          <CategoriesButton />
         </div>
         <div className='hidden sm:flex mx-auto  '>
           <NavLinks />

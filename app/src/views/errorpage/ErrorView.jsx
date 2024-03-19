@@ -3,7 +3,7 @@ import styles from '../../styles/styles'
 import SearchBar from '../../components/searchbar/SearchBar'
 import { HomeIcon } from '@heroicons/react/24/outline'
 
-export default function ErrorPage() {
+const ErrorView = () => {
   // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   window.scrollTo(0, 0)
   const navigate = useNavigate()
@@ -36,3 +36,4 @@ export default function ErrorPage() {
     </div>
   )
 }
+export default ErrorView

@@ -1,49 +1,51 @@
-import { useEffect, useState } from 'react'
-import { Bars3BottomLeftIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
-import { categoriesData } from '../../../static/data'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+// import { useGetCategoriesQuery } from '../../../features/categories/categoriesApiSlice'
+import { categoriesData } from '../../../static/data'
 
-const Categories = () => {
-  const [dropDown, setDropDown] = useState(false)
-  useEffect(() => {})
-  const handleDropMenu = () => {
-    setDropDown(!dropDown)
-  }
-  return (
-    <>
-      <div className='h-[60px] mt-[10px] w-[270px] relative flex flex-col items-center bg-light-background-paper dark:bg-dark-background-main text-light-text-primary dark:text-dark-text-primary rounded-t-lg   '>
-        <button
-          onClick={handleDropMenu}
-          className=' w-full h-full flex items-center justify-around font-Poppins text-lg font-[500] capitalize '
+const Categories = ({ handleDropMenu }) => {
+  // const { data: categoriesData, isLoading, error, isError, isSuccess } = useGetCategoriesQuery('getCategories')
+
+  let content
+
+  // if (isLoading) {
+  //   content = (
+  //     <div className='p-2 mt-1 h-[40vh] flex justify-center items-center'>
+  //       <Loader />
+  //     </div>
+  //   )
+  // }
+
+  // if (isError) {
+  //   content = (
+  //     <div className='text-center flex items-center h-[40vh] p-2 mt-1  text-4xl text-red-500'>
+  //       Something went wrong {error?.message}
+  //     </div>
+  //   )
+  // }
+
+  const categories = categoriesData.map((category, index) => {
+    const categoryUrl = category.title.replace(/\s+/g, '-')
+    return (
+      <Link onClick={handleDropMenu} key={index} to={`/products?category=${categoryUrl}`}>
+        <div
+          className='p-0 flex items-center gap-3 mt-1 rounded-lg bg-light-background-third dark:bg-dark-background-third hover:scale-[1.05] duration-300'
+          id={category.id}
         >
-          <Bars3BottomLeftIcon className='h-7 w-7 -mr-5' />
-          All Categories{' '}
-          <ChevronDownIcon className={` w-5 transition-transform duration-300 ${dropDown ? 'rotate-180' : ''}`} />
-        </button>
-        {categoriesData && dropDown && (
-          <div className='p-2 focus:outline-none max-h-[40vh] overflow-scroll bg-light-background-secondary dark:bg-dark-background-secondary overflow-x-hidden small-scrollbar z-10 w-full absolute left-0 top-14 mt-1 animate-fade-in '>
-            {categoriesData.map((categorie, index) => {
-              {
-                /* const d = categorie.title.toLowerCase() */
-              }
-              const categorieUrl = categorie.title.replace(/\s+/g, '-')
-              return (
-                <Link onClick={handleDropMenu} key={index} to={`/products?category=${categorieUrl}`}>
-                  <div
-                    className='p-0 flex items-center gap-3 mt-1 bg-light-background-third dark:bg-dark-background-third hover:scale-[1.05] duration-300'
-                    key={index}
-                    id={categorie.id}
-                  >
-                    <img src={categorie.image_Url} alt='' className='w-16 h-full  shrink-0 object-cover rounded-lg' />
-                    <p className='font-Poppins dark:text-neutral-100 text-balance'>{categorie.title}</p>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-        )}
-      </div>
-    </>
+          <img src={category.image_Url} alt='' className='w-16 h-full  shrink-0 object-cover rounded-lg' />
+          <p className='font-Poppins dark:text-neutral-100 text-balance'>{category.title}</p>
+        </div>
+      </Link>
+    )
+  })
+  content = (
+    <div className='p-2 mt-1 overflow-y-scroll overflow-x-hidden small-scrollbar max-h-[40vh]'>{categories}</div>
+  )
+
+  return (
+    <div className='pr-1 focus:outline-none overflow-hidden bg-light-background-secondary dark:bg-dark-background-secondary rounded-b-lg z-10 w-full absolute left-0 top-14  animate-fade-in '>
+      {content}
+    </div>
   )
 }
 

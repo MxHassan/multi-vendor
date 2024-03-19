@@ -1,27 +1,32 @@
 import { apiSlice } from '../../app/api/apiSlice'
 import { REGISTER_URL } from '../../constants'
 import { resetUser } from '../user/userSlice'
-import { logOut } from './authSlice'
+import { clearCredentials, logOut } from './authSlice'
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // signup: builder.mutation({
-    //   query: (avatar) => {
-    //     let bodyFormData = new FormData()
-    //     // bodyFormData.append('firstName', credentials.firstName)
-    //     // bodyFormData.append('lastName', credentials.lastName)
-    //     // bodyFormData.append('email', credentials.email)
-    //     // bodyFormData.append('password', credentials.password)
-    //     // bodyFormData.append('confirmPassword', credentials.confirmPassword)
-    //     bodyFormData.append('file', avatar)
-    //     // console.log(bodyFormData, avatar)
-    //     return {
-    //       url: REGISTER_URL,
-    //       method: 'POST',
-    //       body: { ...bodyFormData }
-    //     }
-    //   } 
-    // }),
+    signUp: builder.mutation({
+      // async queryFn(signUpData, _queryApi, _extraOptions, fetchWithBQ) {
+      //   // upload with multipart/form-data
+      //   // console.log('this is signup data', signUpData)
+      //   const response = await fetchWithBQ(
+      //     {
+      //       url: '/users/create-user',
+      //       method: 'POST',
+      //       body: signUpData
+      //     },
+      //     _queryApi,
+      //     _extraOptions
+      //   )
+      //   if (response.error) throw response.error
+      //   return response.data ? { data: response.data } : { error: response.error }
+      // }
+      query: (signUpData) => ({
+        url: '/users/create-user',
+        method: 'POST',
+        body: signUpData
+      })
+    }),
     login: builder.mutation({
       query: (credentials) => ({
         url: '/auth/login',
@@ -39,6 +44,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         try {
           await queryFulfilled.then(() => {
             dispatch(logOut())
+            // dispatch(clearCredentials())
             dispatch(resetUser())
             // dispatch(apiSlice.util.resetApiState())
           })
@@ -55,4 +61,4 @@ export const authApiSlice = apiSlice.injectEndpoints({
     })
   })
 })
-export const { useSignupMutation, useLoginMutation, useSendLogoutMutation, useRefreshMutation } = authApiSlice
+export const { useSignUpMutation, useLoginMutation, useSendLogoutMutation, useRefreshMutation } = authApiSlice

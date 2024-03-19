@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import ActivationError from '../../components/activationpage-content/ActivationError'
 import ActivationSuccess from '../../components/activationpage-content/ActivationSuccess'
 
-const ActivationPage = () => {
+const Activation = () => {
   const { activationToken } = useParams()
   const [error, setError] = useState(null)
   const [response, setResponse] = useState(null)
@@ -42,4 +42,4 @@ const ActivationPage = () => {
   )
 }
 
-export default ActivationPage
+export default Activation

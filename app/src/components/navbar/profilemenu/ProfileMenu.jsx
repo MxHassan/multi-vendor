@@ -6,7 +6,7 @@ import {
   ArrowLeftStartOnRectangleIcon
 } from '@heroicons/react/24/solid'
 import { Menu, MenuHandler, MenuList, MenuItem, Avatar, Typography, Button } from '@material-tailwind/react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Switcher from '../../theme-toggler/Switcher'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTheme, toggleThemeMode } from '../../../features/theme/themeSlice'
@@ -17,10 +17,14 @@ import { PUBLIC_URL } from '../../../constants'
 import { ArrowRightEndOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 const ProfileMenu = () => {
   const navigate = useNavigate()
-  const [sendLogout, { status }] = useSendLogoutMutation()
+  const [sendLogout, { isSuccess }] = useSendLogoutMutation()
+  const [dropMenu, setDropMenu] = useState(false)
+  const handleDropMenu = () => {
+    setDropMenu((cur) => !cur)
+  }
   useEffect(() => {
-    if (status === 'fulfilled') navigate('/welcome')
-  }, [status, navigate])
+    isSuccess && navigate('/welcome')
+  }, [isSuccess, navigate])
   const user = useSelector(selectUser)
   const theme = useSelector(selectCurrentTheme)
   const dispatch = useDispatch()
@@ -28,7 +32,7 @@ const ProfileMenu = () => {
     dispatch(toggleThemeMode())
   }
   return (
-    <Menu>
+    <Menu open={dropMenu} handler={handleDropMenu}>
       <MenuHandler>
         <Avatar
           variant='circular'
@@ -38,27 +42,28 @@ const ProfileMenu = () => {
         />
       </MenuHandler>
       <MenuList className='bg-light-background-secondary dark:bg-dark-background-secondary text-light-text-primary dark:text-dark-text-primary'>
+      {/* user related items */}
         {user && (
           <>
-            <MenuItem>
+            <MenuItem onClick={handleDropMenu}>
               <Link to='/profile' className='flex items-center gap-1'>
                 <UserIcon width={22} />
                 <Typography className='font-medium'>My Profile</Typography>
               </Link>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={handleDropMenu}>
               <Link to='/user/profile' className='flex items-center gap-1'>
                 <Cog8ToothIcon width={22} />
                 <Typography className='font-medium'>Edit Profile</Typography>
               </Link>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={handleDropMenu}>
               <Link to='/user/inbox' className='flex items-center gap-1'>
                 <InboxIcon width={22} />
                 <Typography className='font-medium'>Inbox</Typography>
               </Link>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={handleDropMenu}>
               <Link to='/help' className='flex items-center gap-1'>
                 <LifebuoyIcon width={22} />
                 <Typography className='font-medium'>Help</Typography>
@@ -78,26 +83,20 @@ const ProfileMenu = () => {
         {user && (
           <>
             <MenuItem onClick={() => sendLogout()} className='flex items-center gap-1'>
-              {/* <Link to='/logout' className='flex items-center gap-1'> */}
               <ArrowLeftStartOnRectangleIcon width={22} />
               <Typography className='font-medium'>Sign Out</Typography>
-              {/* </Link> */}
             </MenuItem>
           </>
         )}
         {!user && (
           <>
             <MenuItem onClick={() => navigate('/login')} className='flex items-center gap-1'>
-              {/* <Link to='/logout' className='flex items-center gap-1'> */}
               <ArrowRightEndOnRectangleIcon width={22} className='mr-2 -ml-1' />
               <Typography className='font-medium'>Log In</Typography>
-              {/* </Link> */}
             </MenuItem>
             <MenuItem onClick={() => navigate('/signup')} className='flex items-center gap-1'>
-              {/* <Link to='/logout' className='flex items-center gap-1'> */}
               <UserPlusIcon width={22} className='mr-2 -ml-1' />
               <Typography className='font-medium'>Sign Up</Typography>
-              {/* </Link> */}
             </MenuItem>
           </>
         )}

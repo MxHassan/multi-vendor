@@ -7,11 +7,11 @@ import { selectCurrentTheme } from './features/theme/themeSlice.js'
 import { useEffect } from 'react'
 import { setEventsTime } from './features/events/eventsSlice.js'
 // import { useEffect } from 'react'
-// import axiosApi from './api/axios.js'
 // import { GET_USER_URL } from './constants.js'
 
 function App() {
   const theme = useSelector(selectCurrentTheme)
+
   const dispatch = useDispatch()
   // useEffect(() => {
   //   const getUser = async () => {

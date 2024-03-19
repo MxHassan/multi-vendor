@@ -1,47 +1,56 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-
-import ErrorPage from '../views/errorpage/ErrorPage'
-import Public from '../views/public-page/Public'
-import SignUp from '../views/signup/SignUp'
-import Login from '../views/login/Login'
 import MinimalLayout from '../layout/MinimalLayout'
 import MainLayout from '../layout/MainLayout'
-import Home from '../views/home/Home'
-import ActivationPage from '../views/activation/ActivationPage.jsx'
-import Events from '../views/events/Events.jsx'
-import BestSelling from '../views/best-selling/BestSelling.jsx'
-import Products from '../views/products/Products.jsx'
-import Faq from '../views/faq/FAQ.jsx'
-import ProductDetails from '../views/product-details/ProductDetails.jsx'
-import Profile from '../views/profile/Profile.jsx'
+import ProtectedRoutes from './ProtectedRoutes.jsx'
+import LazyLoadPage from '../components/lazyload-page/LazyLoadPage.jsx'
+import {
+  ActivationPage,
+  BestSellingPage,
+  ErrorPage,
+  EventsPage,
+  FaqPage,
+  HomePage,
+  LoginPage,
+  MainLayoutPage,
+  MinimalLayoutPage,
+  ProductDetailsPage,
+  ProductsPage,
+  ProfilePage,
+  PublicPage,
+  SignUpPage
+} from './lazyComponents.jsx'
+import { ErrorBoundary } from 'react-error-boundary'
+import PublicRoutes from './PublicRoutes.jsx'
 // import CategoriesSection from '../components/Route/catagoriessection/CategoriesSection.jsx'
 // import Categories from '../views/categories/Categories.jsx'
 // import ProtectedRoutes from './ProtectedRoutes.jsx'
+// const LazyHome = lazy(() => import('../views/home/Home'))
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route element={<MinimalLayout />} errorElement={<ErrorPage />}>
-        {/* <Route > */}
+      <Route
+        element={<LazyLoadPage component={<MinimalLayoutPage />} />}
+        errorElement={<LazyLoadPage component={<ErrorPage />} />}
+      >
         {/* public routes*/}
-        <Route path='welcome' element={<Public />} />
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<SignUp />} />
-        <Route path='activation/:activationToken' element={<ActivationPage />} />
-        {/* </Route> */}
-        {/* <Route element={<ProtectedRoutes />} > */}
-        <Route path='/' element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path='best-selling' element={<BestSelling />} />
-          {/* <Route path='categories' element={<CategoriesSection />} /> */}
-          {/* <Route path='categories/:category' element={<Categories />} /> */}
-          <Route path='products' element={<Products />} />
-          <Route path='product/:productName' element={<ProductDetails />} />
-          <Route path='events' element={<Events />} />
-          <Route path='faq' element={<Faq />} />
-          <Route path='profile' element={<Profile />} />
+        <Route element={<PublicRoutes />}>
+          <Route path='welcome' element={<LazyLoadPage component={<PublicPage />} />} />
+          <Route path='login' element={<LazyLoadPage component={<LoginPage />} />} />
+          <Route path='signup' element={<LazyLoadPage component={<SignUpPage />} />} />
+          <Route path='activation/:activationToken' element={<ActivationPage />} />
         </Route>
-        {/* </Route> */}
+        <Route path='/' element={<LazyLoadPage component={<MainLayoutPage />} />}>
+          <Route index element={<LazyLoadPage component={<HomePage />} />} />
+          <Route path='best-selling' element={<LazyLoadPage component={<BestSellingPage />} />} />
+          <Route path='products' element={<LazyLoadPage component={<ProductsPage />} />} />
+          <Route path='product/:productName' element={<LazyLoadPage component={<ProductDetailsPage />} />} />
+          <Route path='events' element={<LazyLoadPage component={<EventsPage />} />} />
+          <Route path='faq' element={<LazyLoadPage component={<FaqPage />} />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path='profile' element={<LazyLoadPage component={<ProfilePage />} />} />
+          </Route>
+        </Route>
       </Route>
     </>
   )

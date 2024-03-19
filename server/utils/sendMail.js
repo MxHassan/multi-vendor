@@ -1,10 +1,8 @@
-const nodemailer = require('nodemailer');
-const { google } = require('googleapis');
 const createTransporter = require('./createTransporter');
-const OAuth2 = google.auth.OAuth2;
 require('dotenv').config();
 
 const sendMail = async (options) => {
+  // console.log('this is mail options', options);
   // const transporter = nodemailer.createTransport({
   //   service: 'Gmail',
   //   auth: {

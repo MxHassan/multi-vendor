@@ -7,6 +7,7 @@ import { setCredentials } from '../../features/auth/authSlice'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Loader from '../../components/loader/Loader'
+import { Backdrop } from '@mui/material'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -51,7 +52,11 @@ const Login = () => {
     }
   }
   if (isLoading) {
-    return <Loader isLoading={isLoading} />
+    return (
+      <Backdrop open={isLoading}>
+        <Loader />
+      </Backdrop>
+    )
   }
   return (
     <div className='flex-col  justify-center py-12 sm:px-6 lg:px-8'>

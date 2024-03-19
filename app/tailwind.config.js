@@ -1,6 +1,7 @@
 import lightTheme from './src/themes/lightTheme'
 import darkTheme from './src/themes/darkTheme'
 import withMT from '@material-tailwind/react/utils/withMT'
+import daisyui from 'daisyui'
 export default withMT({
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
@@ -26,6 +27,16 @@ export default withMT({
           '0%': {
             // transform: 'translateY(-20px)',
             opacity: 0
+          },
+          '100%': {
+            // transform: 'translateY(5px)',
+            opacity: 1
+          }
+        },
+        'fade-in-img': {
+          '0%': {
+            // transform: 'translateY(-20px)',
+            opacity: 0.7
           },
           '100%': {
             // transform: 'translateY(5px)',
@@ -59,10 +70,14 @@ export default withMT({
       },
       animation: {
         'fade-in': 'fade-in 0.2s ease-in-out forwards',
+        'fade-in-img': 'fade-in 0.5s ease-in-out forwards',
         'fade-out': 'fade-out 0.2s ease-in-out forwards',
         'spin-out': 'spin-out 0.3s ease-out forwards'
       }
     }
   },
-  plugins: []
+  plugins: [daisyui],
+  daisyui: {
+    themes: [false]
+  }
 })

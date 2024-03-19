@@ -1,9 +1,47 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { Carousel, IconButton } from '@material-tailwind/react'
+import { Carousel, IconButton, Typography } from '@material-tailwind/react'
 import { eventsData } from '../../../../static/data'
 import EventCard from '../event-card/EventCard'
+import Loader from '../../../loader/Loader'
+import { useGetEventsQuery } from '../../../../features/events/eventsApiSlice'
 
 const EventsCarousel = () => {
+  const { data: events, isSuccess, isLoading, isError, error } = useGetEventsQuery()
+
+  let content
+
+  if (isLoading) {
+    content = (
+      <div className='flex justify-center items-center h-[50vh]'>
+        <Loader />
+      </div>
+    )
+  }
+
+  if (isError) {
+    content = (
+      <div className='flex justify-center items-center h-[50vh]'>
+        <Typography variant='h2' color='red'>
+          Something went wrong {error?.data?.message}
+        </Typography>
+      </div>
+    )
+  }
+
+  if (isSuccess) {
+    const { ids } = events
+
+    if (ids?.length) {
+      content = ids.map((eventId, index) => <EventCard eventId={eventId} key={index} />)
+    } else
+      content = (
+        <div className='flex h-[40vh]  justify-center'>
+          <Typography variant='h1' className='text-center'>
+            No Events Found
+          </Typography>
+        </div>
+      )
+  }
   return (
     <Carousel
       transition={{ duration: 0.7, ease: 'anticipate' }}
@@ -35,7 +73,7 @@ const EventsCarousel = () => {
         </div>
       )}
     >
-      {eventsData && eventsData.map((i, index) => <EventCard key={index} data={i} />)}
+      {content}
     </Carousel>
   )
 }

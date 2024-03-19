@@ -8,7 +8,7 @@ const deleteImage = require('../utils/deleteImage');
 
 // @desc get a user
 // @route GET /users/user
-// @access Private  
+// @access Private
 const getUser = asyncHandler(async (req, res) => {
   const userId = req.userId;
   const user = await User.findById(userId).lean();

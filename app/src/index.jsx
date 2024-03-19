@@ -3,9 +3,11 @@ import App from './App.jsx'
 import { Provider } from 'react-redux'
 import { store } from './app/store.js'
 import React from 'react'
-const root = ReactDOM.createRoot(document.getElementById('root'))
+import { productsApiSlice } from './features/products/productsApiSlice.js'
 
-root.render(
+// store.dispatch(productsApiSlice.endpoints.getProducts.initiate())
+// store.dispatch(categoriesApiSlice.endpoints.getCategories.initiate())
+ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <Provider store={store}>
     <App />
