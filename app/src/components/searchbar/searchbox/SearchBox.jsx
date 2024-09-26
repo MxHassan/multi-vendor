@@ -19,7 +19,7 @@ const Search = () => {
     setSearchData(filteredProducts)
   }
   return (
-    <div className='w-1/2 relative '>
+    <div className={` w-1/2 relative `}>
       <div className='flex relative '>
         <div className='absolute top-2 left-2'>
           {searchActive && (
@@ -34,10 +34,13 @@ const Search = () => {
           onBlur={() => {
             setTimeout(() => {
               if (searchActive) setSearchActive(false)
+              if (searchTerm.length !== 0) setSearchTerm('')
             }, 200)
           }}
           type='search'
-          className='h-10  pl-10 pr-2 bg-light-background-secondary  dark:bg-dark-background-secondary  dark:text-dark-text-primary placeholder:opacity-0  dark:placeholder:text-white rounded-lg hover:w-[80%] hover:placeholder:opacity-50 focus:placeholder:opacity-100 focus:w-full duration-500 mx-auto placeholder:text-gray-600 focus:bg-light-background-paper dark:focus:bg-dark-background-third 1300px:w-[300px] 1100px:w-[200px] 800px:w-32  '
+          className={`h-10  pl-10 pr-2 bg-light-background-secondary  dark:bg-dark-background-secondary  dark:text-dark-text-primary placeholder:opacity-0  dark:placeholder:text-white rounded-lg hover:w-[80%] hover:placeholder:opacity-50 focus:placeholder:opacity-100 focus:w-full duration-500 mx-auto placeholder:text-gray-600 focus:bg-light-background-paper dark:focus:bg-dark-background-third
+            1300px:w-[300px] 1100px:w-[200px] 800px:w-32
+            `}
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder='Search for a product...'
@@ -46,8 +49,9 @@ const Search = () => {
           // }}
         />
       </div>
+      
       {searchData && searchActive && searchTerm !== '' && searchData.length !== 0 && (
-        <div className='absolute mt-1 w-full z-20 '>
+        <div className='absolute mt-1 w-full h-fit z-50 '>
           <div
             className={` mx-auto w-11/12 small-scrollbar bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary   rounded-[4px] px-2 py-1 1000px:px-4  max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
           >

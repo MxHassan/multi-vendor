@@ -72,10 +72,10 @@ export default withMT({
       animation: {
         'fade-in': 'fade-in 0.2s ease-in-out forwards',
         'fade-in-img': 'fade-in 0.5s ease-in-out forwards',
-        'fade-out': 'fade-out 0.2s ease-in-out forwards',
+        'fade-out': 'fade-out 0.3s ease-in-out forwards',
         'spin-out': 'spin-out 0.3s ease-out forwards'
       }
     }
   },
-  plugins: [tailwindScrollbar]
+  plugins: []
 })

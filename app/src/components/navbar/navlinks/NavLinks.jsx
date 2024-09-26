@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { navItems } from '../../../static/data'
 // import { useSelector } from 'react-redux'
 // import { selectNavLinkValue } from '../../../features/nav/navSlice'
-const NavLinks = ({ mobileNav }) => {
+const NavLinks = ({ mobileNav, closeDrawer }) => {
   const navigate = useNavigate()
   // const tabValue = useSelector(selectNavLinkValue)
   return (
@@ -28,6 +28,7 @@ const NavLinks = ({ mobileNav }) => {
               } font-normal font-Poppins text-light-common-black dark:text-light-common-white hover:bg-light-action-hover dark:hover:bg-dark-action-hover duration-200 rounded-lg`}
               onClick={() => {
                 navigate(`${navItem.url}`)
+                mobileNav && closeDrawer()
               }}
               value={navItem.value}
             >

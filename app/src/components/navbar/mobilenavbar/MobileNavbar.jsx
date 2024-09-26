@@ -29,6 +29,8 @@ import NavLinks from '../navlinks/NavLinks'
 import { useSendLogoutMutation } from '../../../features/auth/authApiSlice'
 import { toast } from 'react-toastify'
 
+import MobileSearchBox from './MobileSearchBox'
+
 const MobileNavbar = () => {
   const dispatch = useDispatch()
   const [sendLogout] = useSendLogoutMutation()
@@ -37,7 +39,10 @@ const MobileNavbar = () => {
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value)
   }
-  const closeDrawer = () => dispatch(setMobileNav(false))
+  const closeDrawer = () => {
+    dispatch(setMobileNav(false))
+    setOpen(0)
+  }
   return (
     <MobileDrawer open={mobileNav} onClose={closeDrawer}>
       <div className='w-[320px] h-full bg-light-background-main dark:bg-dark-background-main  '>
@@ -57,18 +62,20 @@ const MobileNavbar = () => {
             </IconButton>
           </div>
           <List className='text-inherit'>
+            <MobileSearchBox handleOpen={handleOpen} />
+            {/* categories */}
             <Accordion
               className='bg-light-background-secondary dark:bg-dark-background-secondary rounded-md text-inherit'
-              open={open === 1}
+              open={open === 2}
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4  transition-transform ${open === 1 ? 'rotate-180' : ''}`}
+                  className={`mx-auto h-4 w-4  transition-transform ${open === 2 ? 'rotate-180' : ''}`}
                 />
               }
             >
-              <ListItem className='p-0  ' selected={open === 1}>
-                <AccordionHeader onClick={() => handleOpen(1)} className='border-b-0 p-3 text-inherit '>
+              <ListItem className='p-0  ' selected={open === 2}>
+                <AccordionHeader onClick={() => handleOpen(2)} className='border-b-0 p-3 text-inherit '>
                   <ListItemPrefix>
                     <PresentationChartBarIcon className='h-5 w-5' />
                   </ListItemPrefix>
@@ -99,33 +106,9 @@ const MobileNavbar = () => {
                 </List>
               </AccordionBody>
             </Accordion>
+            {/* Pages navigator */}
             <Accordion
               className='block sm:hidden'
-              open={open === 2}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4  transition-transform ${open === 2 ? 'rotate-180' : ''}`}
-                />
-              }
-            >
-              <ListItem className='p-0 ' selected={open === 2}>
-                <AccordionHeader onClick={() => handleOpen(2)} className='border-b-0 p-3 text-inherit '>
-                  <ListItemPrefix>
-                    <ShoppingBagIcon className='h-5 w-5' />
-                  </ListItemPrefix>
-                  <Typography className='mr-auto font-normal'>Pages</Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className='py-1 w-2/3 mx-auto'>
-                <div className='flex justify-center bg-light-background-paper dark:bg-dark-background-paper rounded-xl py-4 '>
-                  <NavLinks mobileNav={true} />
-                </div>
-              </AccordionBody>
-            </Accordion>
-            <hr className='my-2 border-blue-gray-50' />
-            <Accordion
-              className='flex flex-col lg:hidden'
               open={open === 3}
               icon={
                 <ChevronDownIcon
@@ -137,6 +120,33 @@ const MobileNavbar = () => {
               <ListItem className='p-0 ' selected={open === 3}>
                 <AccordionHeader onClick={() => handleOpen(3)} className='border-b-0 p-3 text-inherit '>
                   <ListItemPrefix>
+                    <ShoppingBagIcon className='h-5 w-5' />
+                  </ListItemPrefix>
+                  <Typography className='mr-auto font-normal'>Pages</Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className='py-1 w-2/3 mx-auto'>
+                <div className='flex justify-center bg-light-background-paper dark:bg-dark-background-paper rounded-xl py-4 '>
+                  <NavLinks closeDrawer={closeDrawer} mobileNav={true} />
+                </div>
+              </AccordionBody>
+            </Accordion>
+            <hr className='my-2 border-blue-gray-50' />
+
+            {/* Profile Pages navigator */}
+            <Accordion
+              className='flex flex-col lg:hidden'
+              open={open === 4}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4  transition-transform ${open === 4 ? 'rotate-180' : ''}`}
+                />
+              }
+            >
+              <ListItem className='p-0 ' selected={open === 4}>
+                <AccordionHeader onClick={() => handleOpen(4)} className='border-b-0 p-3 text-inherit '>
+                  <ListItemPrefix>
                     <UserCircleIcon width={25} />
                   </ListItemPrefix>
                   <Typography className='mr-auto font-normal'>Profile</Typography>
@@ -146,13 +156,14 @@ const MobileNavbar = () => {
                 <ProfileSideBar mobileNav={true} closeDrawer={closeDrawer} />
               </AccordionBody>
             </Accordion>
-
+            {/* not functional */}
             <ListItem>
               <ListItemPrefix>
                 <Cog6ToothIcon className='h-5 w-5' />
               </ListItemPrefix>
               Settings
             </ListItem>
+            {/* logout button */}
             <ListItem
               onClick={async () =>
                 await sendLogout()
