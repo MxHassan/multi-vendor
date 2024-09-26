@@ -1,7 +1,5 @@
-// import { Button } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
-import styles from '../../styles/styles'
-import { ArrowRightEndOnRectangleIcon, ArrowRightStartOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
+import { ArrowRightEndOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 import { Button } from '@material-tailwind/react'
 
 const Public = () => {

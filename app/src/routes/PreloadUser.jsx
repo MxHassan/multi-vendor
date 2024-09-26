@@ -1,11 +1,18 @@
-import { useGetUserMutation } from '../features/user/userApiSlice'
+import { store } from '../app/store'
+import { userApiSlice } from '../features/user/userApiSlice'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-import { toast } from 'react-toastify'
 const PreloadUser = () => {
-  // isError && toast.error(error?.data?.message)
-  // // useEffect(() => {
-  // // }, [isError, error])
-  // return isSuccess && <Outlet />
+  useEffect(() => {
+    console.log('subscribing')
+    const user = store.dispatch(userApiSlice.endpoints.getUser.initiate())
+
+    return () => {
+      console.log('unsubscribing')
+      user.reset()
+    }
+  }, [])
+
+  return <Outlet />
 }
 export default PreloadUser

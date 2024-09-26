@@ -7,7 +7,7 @@ const InfoAndLinksArea = () => {
     <div className='grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center'>
       <ul className='px-5 text-center sm:text-start flex sm:block flex-col items-center'>
         <img
-          src='https://shopo.quomodothemes.website/assets/images/logo.svg'
+          src='https://cdn.pixabay.com/photo/2021/08/10/16/02/amazon-6536326_1280.png'
           alt=''
           className='dark:invert-[1] brightness-0  opacity-80 dark:opacity-90'
         />

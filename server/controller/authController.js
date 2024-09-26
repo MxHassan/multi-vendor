@@ -34,7 +34,7 @@ const logout = asyncHandler(async (req, res) => {
       secure: true,
       sameSite: 'None'
     })
-    .json({ message: 'cookie cleared' });
+    .json({ success: true, message: 'cookie cleared' });
 });
 
 // @desc refresh
@@ -42,7 +42,7 @@ const logout = asyncHandler(async (req, res) => {
 // @access Private
 const refresh = asyncHandler(async (req, res) => {
   const cookie = req.cookies;
-  if (!cookie?.jwt) return res.status(401).json({ message: 'Unauthorized' });
+  if (!cookie?.jwt) return res.status(401).json({ message: 'Unauthorized no cookie' });
   const refreshToken = cookie.jwt;
   jwt.verify(
     refreshToken,
@@ -51,7 +51,7 @@ const refresh = asyncHandler(async (req, res) => {
       if (err) return res.status(403).json({ message: 'Forbidden' });
       try {
         const user = await User.findById(decoded.userInfo.id);
-        if (!user) return res.status(401).json({ message: 'Unauthorized' });
+        if (!user) return res.status(401).json({ message: 'Unauthorized from verify' });
         const accessToken = user.getJwtAccessToken();
         res.json({ accessToken });
       } catch (error) {

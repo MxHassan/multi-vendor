@@ -168,7 +168,7 @@ const Cart = () => {
   return (
     <>
       <CartDrawer anchor='right' open={openCart} onClose={handleCloseCart}>
-        <div className='p-4 flex flex-col  w-[25vw] h-screen bg-light-background-main dark:bg-dark-background-main text-light-text-primary dark:text-dark-text-primary '>
+        <div className='p-4 flex flex-col w-full sm:w-[70vw] md:w-[50vw] 1100px:w-[35vw] 1300px:w-[30vw] h-screen bg-light-background-main dark:bg-dark-background-main text-light-text-primary dark:text-dark-text-primary '>
           <div className='mb-6 p-4 flex items-center justify-between'>
             <Button ripple={false} className='text-inherit flex gap-3 items-center capitalize ' variant='text'>
               <ShoppingCartIcon width={35} />

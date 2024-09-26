@@ -3,11 +3,12 @@ import SearchBox from './searchbox/SearchBox'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { Button, IconButton } from '@material-tailwind/react'
 import Switcher from '../theme-toggler/Switcher'
-import { toggleThemeMode } from '../../features/theme/themeSlice'
-import { useDispatch } from 'react-redux'
+import { selectCurrentTheme, toggleThemeMode } from '../../features/theme/themeSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
+  const theme = useSelector(selectCurrentTheme)
   const toggleDarkTheme = () => {
     dispatch(toggleThemeMode())
   }
@@ -17,9 +18,10 @@ const SearchBar = () => {
         {/* logo */}
         <Link to='/'>
           <img
-            className='h-[40px] max-w-[150px] object-contain'
-            src='https://shopo.quomodothemes.website/assets/images/logo.svg'
-            alt='shop o logo'
+            className={`h-[40px] max-w-[150px] object-contain ${theme && 'invert-[1] brightness-0'}`}
+            // src='https://shopo.quomodothemes.website/assets/images/logo.svg'
+            src='https://cdn.pixabay.com/photo/2021/08/10/16/02/amazon-6536326_1280.png'
+            alt='shop logo'
           />
         </Link>
         <SearchBox />

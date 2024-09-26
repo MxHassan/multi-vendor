@@ -1,6 +1,22 @@
 /* eslint-disable react/no-unknown-property */
 // navigation Data
-import { ArrowPathIcon, ShieldCheckIcon, ShoppingBagIcon, TrophyIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowPathIcon,
+  ShieldCheckIcon,
+  ShoppingBagIcon,
+  TrophyIcon,
+  UserIcon,
+  TruckIcon,
+  CreditCardIcon,
+  ReceiptRefundIcon,
+  HomeIcon,
+  Cog8ToothIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  ArrowRightIcon,
+  ArrowLeftStartOnRectangleIcon
+} from '@heroicons/react/24/outline'
+import { IconButton } from '@material-tailwind/react'
+import { Link } from 'react-router-dom'
 export const navItems = [
   {
     title: 'Home',
@@ -26,6 +42,98 @@ export const navItems = [
     title: 'FAQ',
     value: 'faq',
     url: '/faq'
+  }
+]
+export const ordersPageColumns = [
+  { field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7 },
+
+  {
+    field: 'status',
+    headerName: 'Status',
+    minWidth: 130,
+    flex: 0.7
+    // cellClassName: (params) => {
+    //   return params.getValue(params.id, 'status') === 'Delivered' ? 'greenColor' : 'redColor'
+    // }
+  },
+  {
+    field: 'itemsQty',
+    headerName: 'Items Qty',
+    type: 'number',
+    minWidth: 130,
+    flex: 0.7
+  },
+
+  {
+    field: 'total',
+    headerName: 'Total',
+    type: 'number',
+    minWidth: 130,
+    flex: 0.8
+  },
+
+  {
+    field: ' ',
+    flex: 1,
+    minWidth: 150,
+    headerName: '',
+    type: 'number',
+    sortable: false,
+    renderCell: (params) => {
+      return (
+        <>
+          <Link to={`/user/order/${params.id}`}>
+            <IconButton>
+              <ArrowRightIcon size={20} />
+            </IconButton>
+          </Link>
+        </>
+      )
+    }
+  }
+]
+export const profileItems = [
+  {
+    title: 'Profile',
+    value: 'profile',
+    icon: UserIcon,
+    url: '/profile'
+  },
+  {
+    title: 'Orders',
+    value: 'orders',
+    icon: ShoppingBagIcon,
+    url: '/profile/orders'
+  },
+  {
+    title: 'Refund',
+    value: 'refund',
+    icon: ReceiptRefundIcon,
+    url: '/profile/refund'
+  },
+  {
+    title: 'Track Order',
+    value: 'track-order',
+    icon: TruckIcon,
+    url: '/profile/track-order'
+  },
+  {
+    title: 'Payment Methodes',
+    value: 'payment-methodes',
+    icon: CreditCardIcon,
+    url: '/profile/payment-methodes'
+  },
+  {
+    title: 'User Address',
+    value: 'user-address',
+    icon: HomeIcon,
+    url: '/profile/user-address'
+  },
+  {
+    title: 'Inbox',
+    value: 'inbox',
+    icon: ChatBubbleOvalLeftEllipsisIcon,
+    url: '/profile/inbox'
   }
 ]
 

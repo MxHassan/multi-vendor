@@ -102,8 +102,8 @@ const ProductDetailsCard = ({ productId }) => {
         <div className='flex flex-col 800px:flex-row'>
           {/* product preview */}
           <div className='w-full 800px:w-1/2  800px:border-r-2 border-r-light-background-third '>
-            <div className='flex justify-center'>
               {/* product images dialog */}
+            <div className='flex justify-center'>
               <Card
                 className=' h-[50vh] cursor-pointer overflow-hidden transition-opacity hover:opacity-90'
                 onClick={handleOpen}

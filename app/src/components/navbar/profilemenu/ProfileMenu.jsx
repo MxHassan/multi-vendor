@@ -5,8 +5,8 @@ import {
   LifebuoyIcon,
   ArrowLeftStartOnRectangleIcon
 } from '@heroicons/react/24/solid'
-import { Menu, MenuHandler, MenuList, MenuItem, Avatar, Typography, Button } from '@material-tailwind/react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Menu, MenuHandler, MenuList, MenuItem, Avatar, Typography } from '@material-tailwind/react'
+import { Link, useNavigate } from 'react-router-dom'
 import Switcher from '../../theme-toggler/Switcher'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTheme, toggleThemeMode } from '../../../features/theme/themeSlice'
@@ -15,8 +15,12 @@ import { useEffect, useState } from 'react'
 import { selectUser } from '../../../features/user/userSlice'
 import { PUBLIC_URL } from '../../../constants'
 import { ArrowRightEndOnRectangleIcon, UserPlusIcon } from '@heroicons/react/24/outline'
+import { toast } from 'react-toastify'
+import { selectNavActive } from '../../../features/nav/navSlice'
 const ProfileMenu = () => {
   const navigate = useNavigate()
+  const navActive = useSelector(selectNavActive)
+
   const [sendLogout, { isSuccess }] = useSendLogoutMutation()
   const [dropMenu, setDropMenu] = useState(false)
   const handleDropMenu = () => {
@@ -42,7 +46,7 @@ const ProfileMenu = () => {
         />
       </MenuHandler>
       <MenuList className='bg-light-background-secondary dark:bg-dark-background-secondary text-light-text-primary dark:text-dark-text-primary'>
-      {/* user related items */}
+        {/* user related items */}
         {user && (
           <>
             <MenuItem onClick={handleDropMenu}>
@@ -71,18 +75,30 @@ const ProfileMenu = () => {
             </MenuItem>
           </>
         )}
-        <MenuItem onClick={toggleDarkTheme} className='flex items-center flex-col justify-around '>
+
+        <MenuItem
+          onClick={toggleDarkTheme}
+          className={`${navActive ? ' flex' : 'flex 800px:hidden '}  items-center flex-col  `}
+        >
           <Typography variant='lead' className='text-nowrap font-medium text-base'>
             Switch To {theme ? 'Light' : 'Dark'}
           </Typography>
           <Switcher profileMenu={true} />
         </MenuItem>
-
         <hr className='my-2 border-light-background-third ' />
 
         {user && (
           <>
-            <MenuItem onClick={() => sendLogout()} className='flex items-center gap-1'>
+            <MenuItem
+              onClick={async () =>
+                await sendLogout()
+                  .unwrap()
+                  .then((data) => {
+                    if (data.success) toast.success('User logged out successfully')
+                  })
+              }
+              className='flex items-center gap-1'
+            >
               <ArrowLeftStartOnRectangleIcon width={22} />
               <Typography className='font-medium'>Sign Out</Typography>
             </MenuItem>

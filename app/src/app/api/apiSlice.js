@@ -17,6 +17,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
   console.log("don't forget to remove this", result) // dont forget to remove this
+
   if (result?.error?.status === 403) {
     console.log('sending refresh token')
     const refreshResult = await baseQuery('/auth/refresh', api, extraOptions)
@@ -24,9 +25,12 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       api.dispatch(setCredentials({ ...refreshResult.data }))
       result = await baseQuery(args, api, extraOptions)
     } else {
-      if (refreshResult?.error?.status === 403) {
+      if (refreshResult?.error?.status === 403 || refreshResult?.error?.status === 401) {
         api.dispatch(clearCredentials())
         refreshResult.error.data.message = 'Your login has expired.'
+        // } else if (refreshResult?.error?.status === 401) {
+        //   api.dispatch(clearCredentials())
+        //   refreshResult.error.data.message = 'Unauthorized cookie'
       }
       return refreshResult
     }

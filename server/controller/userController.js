@@ -75,6 +75,7 @@ const createUser = asyncHandler(async (req, res) => {
             .status(201)
             .json({ success: true, message: `please check your email: ${user.email} to activate your account`, activationUrl });
         })
+        // need to handle this error
         .catch((err) => console.log(err));
     } catch (err) {
       return res.status(500).json({ message: `from small trycatch ${err.message}` });

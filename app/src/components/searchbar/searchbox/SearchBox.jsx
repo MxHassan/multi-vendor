@@ -49,7 +49,7 @@ const Search = () => {
       {searchData && searchActive && searchTerm !== '' && searchData.length !== 0 && (
         <div className='absolute mt-1 w-full z-20 '>
           <div
-            className={` mx-auto w-11/12  bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary  small-scrollbar rounded-[4px] px-2 py-1 1000px:px-4  max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
+            className={` mx-auto w-11/12 small-scrollbar bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary   rounded-[4px] px-2 py-1 1000px:px-4  max-h-[40vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
           >
             {searchData.map((i, index) => {
               const d = i.name

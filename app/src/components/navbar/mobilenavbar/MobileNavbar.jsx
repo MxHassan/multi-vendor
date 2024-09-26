@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectMobileNav, setMobileNav } from '../../../features/nav/navSlice'
 import {
   ChevronDownIcon,
-  ChevronRightIcon,
   Cog6ToothIcon,
   PowerIcon,
   PresentationChartBarIcon,
@@ -25,10 +24,14 @@ import {
 import { useState } from 'react'
 import { categoriesData } from '../../../static/data'
 import { Link } from 'react-router-dom'
+import ProfileSideBar from '../../profile/ProfileSideBar'
+import NavLinks from '../navlinks/NavLinks'
+import { useSendLogoutMutation } from '../../../features/auth/authApiSlice'
+import { toast } from 'react-toastify'
 
 const MobileNavbar = () => {
   const dispatch = useDispatch()
-
+  const [sendLogout] = useSendLogoutMutation()
   const mobileNav = useSelector(selectMobileNav)
   const [open, setOpen] = useState(0)
   const handleOpen = (value) => {
@@ -37,7 +40,7 @@ const MobileNavbar = () => {
   const closeDrawer = () => dispatch(setMobileNav(false))
   return (
     <MobileDrawer open={mobileNav} onClose={closeDrawer}>
-      <div className='w-[300px] h-full bg-light-background-main dark:bg-dark-background-main  '>
+      <div className='w-[320px] h-full bg-light-background-main dark:bg-dark-background-main  '>
         <Card
           color='transparent'
           shadow={false}
@@ -97,6 +100,7 @@ const MobileNavbar = () => {
               </AccordionBody>
             </Accordion>
             <Accordion
+              className='block sm:hidden'
               open={open === 2}
               icon={
                 <ChevronDownIcon
@@ -110,41 +114,55 @@ const MobileNavbar = () => {
                   <ListItemPrefix>
                     <ShoppingBagIcon className='h-5 w-5' />
                   </ListItemPrefix>
-                  <Typography className='mr-auto font-normal'>E-Commerce</Typography>
+                  <Typography className='mr-auto font-normal'>Pages</Typography>
                 </AccordionHeader>
               </ListItem>
-              <AccordionBody className='py-1 '>
-                <List className='p-0 text-light-text-primary dark:text-dark-text-primary'>
-                  <ListItem className=''>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className='h-3 w-5' />
-                    </ListItemPrefix>
-                    Orders
-                  </ListItem>
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className='h-3 w-5' />
-                    </ListItemPrefix>
-                    Products
-                  </ListItem>
-                </List>
+              <AccordionBody className='py-1 w-2/3 mx-auto'>
+                <div className='flex justify-center bg-light-background-paper dark:bg-dark-background-paper rounded-xl py-4 '>
+                  <NavLinks mobileNav={true} />
+                </div>
               </AccordionBody>
             </Accordion>
             <hr className='my-2 border-blue-gray-50' />
+            <Accordion
+              className='flex flex-col lg:hidden'
+              open={open === 3}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4  transition-transform ${open === 3 ? 'rotate-180' : ''}`}
+                />
+              }
+            >
+              <ListItem className='p-0 ' selected={open === 3}>
+                <AccordionHeader onClick={() => handleOpen(3)} className='border-b-0 p-3 text-inherit '>
+                  <ListItemPrefix>
+                    <UserCircleIcon width={25} />
+                  </ListItemPrefix>
+                  <Typography className='mr-auto font-normal'>Profile</Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className='py-1  '>
+                <ProfileSideBar mobileNav={true} closeDrawer={closeDrawer} />
+              </AccordionBody>
+            </Accordion>
 
-            <ListItem>
-              <ListItemPrefix>
-                <UserCircleIcon className='h-5 w-5' />
-              </ListItemPrefix>
-              Profile
-            </ListItem>
             <ListItem>
               <ListItemPrefix>
                 <Cog6ToothIcon className='h-5 w-5' />
               </ListItemPrefix>
               Settings
             </ListItem>
-            <ListItem>
+            <ListItem
+              onClick={async () =>
+                await sendLogout()
+                  .unwrap()
+                  .then((data) => {
+                    if (data.success) toast.success('User logged out successfully')
+                    closeDrawer()
+                  })
+              }
+            >
               <ListItemPrefix>
                 <PowerIcon className='h-5 w-5' />
               </ListItemPrefix>

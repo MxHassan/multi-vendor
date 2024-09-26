@@ -26,6 +26,7 @@ const NavbarTop = () => {
   })
 
   return (
+    // implemnt profile side bar with navside bar
     <div
       className={`${
         navActive && 'fixed 800px:fixed top-0 left-0   '

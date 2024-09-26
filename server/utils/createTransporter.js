@@ -21,15 +21,28 @@ const createTransporter = async () => {
       });
     });
 
+    // const transporter = nodemailer.createTransport({
+    //   service: 'gmail',
+    //   auth: {
+    //     type: 'OAuth2',
+    //     user: process.env.SMPT_MAIL,
+    //     accessToken,
+    //     clientId: process.env.CLIENT_ID,
+    //     clientSecret: process.env.CLIENT_SECRET,
+    //     refreshToken: process.env.SMPT_REFRESH_TOKEN
+    //   }
+    // });
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         type: 'OAuth2',
         user: process.env.SMPT_MAIL,
-        accessToken,
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.SMPT_REFRESH_TOKEN
+        refreshToken: process.env.SMPT_REFRESH_TOKEN,
+        accessToken
       }
     });
     return transporter;

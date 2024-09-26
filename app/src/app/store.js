@@ -6,6 +6,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import themeReducer from '../features/theme/themeSlice'
 import eventsReducer from '../features/events/eventsSlice'
 import userReducer from '../features/user/userSlice'
+import profileReducer from '../features/profile/profileSlice'
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -13,7 +14,8 @@ export const store = configureStore({
     nav: navReducer,
     theme: themeReducer,
     events: eventsReducer,
-    user: userReducer
+    user: userReducer,
+    profile: profileReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
   devTools: true

@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../components/navbar/Navbar'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 import { selectNavActive } from '../features/nav/navSlice'
 import { useSelector } from 'react-redux'

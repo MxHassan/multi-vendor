@@ -8,6 +8,10 @@ export const ActivationPage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'ActivationPage' */ '../views/activation/Activation')
 )
+export const ActivationPromptPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'ActivationPromptPage' */ '../views/activation-prompt/ActivationPrompt')
+)
 export const BestSellingPage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'BestSellingPage' */ '../views/best-selling/BestSelling')
@@ -39,6 +43,38 @@ export const ProductsPage = importWithPreload(() =>
 export const ProfilePage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'ProfilePage' */ '../views/profile/Profile')
+)
+export const ProfileContentPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'ProfileContentPage' */ '../components/profile/ProfileContent')
+)
+export const OrdersPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'OrdersPage' */ '../components/profile/Orders')
+)
+export const TrackOrderPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'TrackOrderPage' */ '../components/profile/TrackOrder')
+)
+export const PaymentMethodesPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'PaymentMethodesPage' */ '../components/profile/PaymentMethodes')
+)
+export const RefundPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'RefundPage' */ '../components/profile/Refund')
+)
+export const InboxPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'InboxPage' */ '../components/profile/Inbox')
+)
+export const ChangePasswordPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'ChangePasswordPage' */ '../components/profile/ChangePassword')
+)
+export const UserAddressPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'UserAddressPage' */ '../components/profile/UserAddress')
 )
 export const PublicPage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one

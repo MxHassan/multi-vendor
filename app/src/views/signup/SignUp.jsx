@@ -1,9 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import axiosApi from '../../api/axios'
 import { ValidiateProps } from '../../utils/validation'
-import { REGISTER_URL } from '../../constants'
 import { Avatar, Button, Checkbox, Input, Typography } from '@material-tailwind/react'
 import { CloudArrowUpIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Backdrop, Button as MuiButton } from '@mui/material'
@@ -11,7 +9,7 @@ import { useSignUpMutation } from '../../features/auth/authApiSlice'
 import Loader from '../../components/loader/Loader'
 const SignUp = () => {
   const navigate = useNavigate()
-  const [signup, { isLoading }] = useSignUpMutation()
+  const [signup, { isLoading, isSuccess }] = useSignUpMutation()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [avatar, setAvatar] = useState(null)
@@ -124,14 +122,11 @@ const SignUp = () => {
     }
   }, [values, errors, matchError, firstName, lastName, avatar])
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (isSuccess) {
-  //       navigate('/login')
-  //     }
-  //   }, 4 * 1000)
-  //   return clearTimeout()
-  // }, [isSuccess, navigate])
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/activation/prompt')
+    }
+  }, [isSuccess, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -262,7 +257,7 @@ const SignUp = () => {
               <Checkbox
                 color='indigo'
                 value={showPassword}
-                onClwwick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowPassword(!showPassword)}
                 id='showPassword'
                 className='bg-light-background-main'
                 label={
