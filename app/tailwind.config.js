@@ -1,8 +1,7 @@
 import lightTheme from './src/themes/lightTheme'
 import darkTheme from './src/themes/darkTheme'
 import withMT from '@material-tailwind/react/utils/withMT'
-import daisyui from 'daisyui'
-import tailwindScrollbar from 'tailwind-scrollbar'
+
 export default withMT({
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
