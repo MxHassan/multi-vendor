@@ -1,5 +1,4 @@
 {
-  "name": "multi-vendor-front-end",
   "description": "E-Commerce-multi-vendor Project",
   "name": "E-Commerce",
   "private": true,
@@ -8,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
