@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
+  Button,
   Card,
   IconButton,
   List,
@@ -11,7 +12,7 @@ import {
 } from '@material-tailwind/react'
 import { Drawer as MobileDrawer } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectMobileNav, setMobileNav } from '../../../features/nav/navSlice'
+import { selectMobileNav, setMobileNav, setOpenCart, setOpenWishlist } from '../../../features/nav/navSlice'
 import {
   ChevronDownIcon,
   Cog6ToothIcon,
@@ -30,11 +31,15 @@ import { useSendLogoutMutation } from '../../../features/auth/authApiSlice'
 import { toast } from 'react-toastify'
 
 import MobileSearchBox from './MobileSearchBox'
+import CartIcon from '../../cart/CartIcon'
+import WishlistIcon from '../../wishlist/WishlistIcon'
 
 const MobileNavbar = () => {
   const dispatch = useDispatch()
   const [sendLogout] = useSendLogoutMutation()
   const mobileNav = useSelector(selectMobileNav)
+  const handleOpenCart = () => dispatch(setOpenCart())
+  const handleOpenWishlist = () => dispatch(setOpenWishlist())
   const [open, setOpen] = useState(0)
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value)
@@ -63,6 +68,7 @@ const MobileNavbar = () => {
           </div>
           <List className='text-inherit'>
             <MobileSearchBox handleOpen={handleOpen} />
+
             {/* categories */}
             <Accordion
               className='bg-light-background-secondary dark:bg-dark-background-secondary rounded-md text-inherit'
@@ -85,6 +91,7 @@ const MobileNavbar = () => {
               <AccordionBody className='py-1 text-inherit'>
                 <List className='p-2 focus:outline-none max-h-[40vh] overflow-scroll overflow-x-hidden small-scrollbar text-inherit'>
                   {categoriesData &&
+                    open === 2 &&
                     categoriesData.map((categorie, index) => {
                       const d = categorie.title.toLowerCase()
                       const categorieUrl = d.replace(/\s+/g, '-')
@@ -131,7 +138,7 @@ const MobileNavbar = () => {
                 </div>
               </AccordionBody>
             </Accordion>
-            <hr className='my-2 border-blue-gray-50' />
+            <hr className='my-2 border-gray-500 dark:border-blue-gray-50' />
 
             {/* Profile Pages navigator */}
             <Accordion
@@ -156,6 +163,37 @@ const MobileNavbar = () => {
                 <ProfileSideBar mobileNav={true} closeDrawer={closeDrawer} />
               </AccordionBody>
             </Accordion>
+            {/* cart and wishlist */}
+            <div className='flex flex-col 800px:hidden  gap-4'>
+              <Button
+                variant='outlined'
+                color='orange'
+                className='flex items-center capitalize gap-4 text-inherit'
+                onClick={() => {
+                  closeDrawer()
+                  handleOpenCart()
+                }}
+              >
+                <CartIcon sidebar={true} />
+                <Typography variant='lead' className=''>
+                  Shopping Cart
+                </Typography>
+              </Button>
+              <Button
+                variant='outlined'
+                color='cyan'
+                className='flex items-center capitalize gap-4 text-inherit'
+                onClick={() => {
+                  closeDrawer()
+                  handleOpenWishlist()
+                }}
+              >
+                <WishlistIcon sidebar={true} />
+                <Typography variant='lead' className=''>
+                  Whishlist
+                </Typography>
+              </Button>
+            </div>
             {/* not functional */}
             <ListItem>
               <ListItemPrefix>

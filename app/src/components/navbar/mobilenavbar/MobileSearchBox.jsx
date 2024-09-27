@@ -61,45 +61,47 @@ const MobileSearchBox = ({ handleOpen }) => {
           />
         </div>
       </AccordionHeader>
-
       <AccordionBody className='py-1 text-inherit'>
-        <List className='p-2'>
-          {searchData && searchActive && searchTerm !== '' && searchData.length !== 0 && (
-            <div
-              className={` w-full small-scrollbar bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary   rounded-[4px] px-2 py-1 1000px:px-4  max-h-[50vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
-            >
-              {searchData.map((i, index) => {
-                const d = i.name
-                const Product_name = d.replace(/\s+/g, '-')
-                return (
-                  <Button
-                    className='capitalize text-base text-inherit'
-                    variant='text'
-                    size='sm'
-                    onClick={() => {
-                      setSearchActive(false)
-                      setSearchTerm('')
-                      navigate(`/product/${Product_name}`)
-                    }}
-                    fullWidth
+        <List className='p-2 w-full small-scrollbar bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary   rounded-[4px] px-2 py-1 1000px:px-4  max-h-[50vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 '>
+          {!searchData && !searchActive && searchTerm === '' && searchData.length === 0 && <ListItem />}
+          {searchData &&
+            searchActive &&
+            searchTerm !== '' &&
+            searchData.length !== 0 &&
+            searchData.map((i, index) => {
+              const d = i.name
+              const Product_name = d.replace(/\s+/g, '-')
+              return (
+                <Button
+                  className='capitalize text-base text-inherit'
+                  variant='text'
+                  size='sm'
+                  onClick={() => {
+                    setSearchActive(false)
+                    setSearchTerm('')
+                    navigate(`/product/${Product_name}`)
+                  }}
+                  fullWidth
+                  key={index}
+                  to={`/product/${Product_name}`}
+                >
+                  <ListItem
+                    className='p-0 hover:scale-[1.05] flex flex-col hover:text-inherit  bg-light-background-secondary dark:bg-dark-background-secondary duration-300'
                     key={index}
-                    to={`/product/${Product_name}`}
+                    id={i.id}
                   >
-                    <ListItem
-                      className='p-0 hover:scale-[1.05] flex flex-col hover:text-inherit  bg-light-background-secondary dark:bg-dark-background-secondary duration-300'
-                      key={index}
-                      id={i.id}
-                    >
-                      <ListItemPrefix className='w-24 shrink-0 rounded-lg '>
-                        <img src={i.image_Url[0].url} alt='' className='w-full h-full object-cover rounded-lg ' />
-                      </ListItemPrefix>
-                      <p className='text-base'>{i.name}</p>
-                    </ListItem>
-                  </Button>
-                )
-              })}
-            </div>
-          )}
+                    <ListItemPrefix className='w-24 shrink-0 rounded-lg '>
+                      <img src={i.image_Url[0].url} alt='' className='w-full h-full object-cover rounded-lg ' />
+                    </ListItemPrefix>
+                    <p className='text-base'>{i.name}</p>
+                  </ListItem>
+                </Button>
+              )
+            })}
+          {/* <div
+              className={` w-full small-scrollbar bg-light-background-secondary dark:bg-dark-background-secondary dark:text-dark-text-primary   rounded-[4px] px-2 py-1 1000px:px-4  max-h-[50vh] overflow-scroll overflow-x-hidden animate-fade-in duration-300 `}
+            > */}
+          {/* </div> */}
         </List>
       </AccordionBody>
     </Accordion>

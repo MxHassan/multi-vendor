@@ -19,7 +19,7 @@ const RefundsTable = ({ rows }) => {
   const columns = ['Order ID', 'Status', 'Items Qty', 'Total', 'Refund']
   return (
     <Card className='h-full w-full   '>
-      <CardBody className='overflow-x-hidden px-0 bg-light-background-secondary dark:bg-dark-background-main rounded-md duration-200'>
+      <CardBody className='small-scrollbar 1000px:overflow-hidden overflow-x-scroll px-0 bg-light-background-secondary dark:bg-dark-background-main rounded-md duration-200'>
         <table className='w-full min-w-max  table-auto text-left bg-light-background-main dark:bg-dark-background-secondary text-light-text-secondary dark:text-dark-text-primary duration-200'>
           <thead>
             <tr>

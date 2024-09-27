@@ -50,7 +50,7 @@ const Profile = () => {
 
   if (isSuccess) {
     content = (
-      <div className={`${styles.section} gap-10 flex py-10  h-screen 800px:h-[calc(100vh-160px)]`}>
+      <div className={`${styles.section} gap-10 flex py-10  sm:h-screen 800px:h-[calc(100vh-160px)]`}>
         <div className='mt-[70px] 800px:mt-0 hidden lg:flex'>
           <ProfileSideBar />
         </div>

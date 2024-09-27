@@ -145,17 +145,16 @@ const ProfileContent = () => {
             )}
           </Dialog>
         </div>
-        <br />
-        <br />
-        <div className='w-full px-5   '>
+
+        <div className='w-full px-5 sm:mt-8  '>
           <form noValidate className=' flex flex-col gap-4 items-start'>
             {/* User Name */}
-            <div className='flex  gap-4 '>
-              <div className='flex items-center gap-3'>
-                <label htmlFor='firstName'>
-                  <Typography variant='h4'>First Name</Typography>
+            <div className='flex flex-col sm:flex-row w-full gap-4 '>
+              <div className='flex flex-col md:flex-row w-full md:items-center md:gap-3'>
+                <label htmlFor='firstName' className='w-full  lg:w-2/5'>
+                  <Typography className='text-xl lg:text-2xl font-extrabold text-nowrap'>First Name</Typography>
                 </label>
-                <div className='mt-1'>
+                <div className='w-full  lg:w-3/5'>
                   <input
                     className='disabled:bg-light-background-main duration-200 disabled:dark:bg-dark-background-third appearance-none capitalize dark:text-light-text-primary block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm  focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
                     type='text'
@@ -169,11 +168,11 @@ const ProfileContent = () => {
                   />
                 </div>
               </div>
-              <div className='flex items-center gap-3'>
-                <label htmlFor='lastName'>
-                  <Typography variant='h4'>Last Name</Typography>
+              <div className='flex flex-col md:flex-row w-full md:items-center md:gap-3'>
+                <label htmlFor='lastName' className='w-full  lg:w-2/5'>
+                  <Typography className='text-xl lg:text-2xl font-extrabold text-nowrap'>Last Name</Typography>
                 </label>
-                <div>
+                <div className='w-full  lg:w-3/5'>
                   <input
                     className='duration-200 disabled:bg-light-background-main disabled:dark:bg-dark-background-third appearance-none capitalize block w-full px-3 py-2 border dark:text-light-text-primary border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
                     type='text'
@@ -189,15 +188,12 @@ const ProfileContent = () => {
               </div>
             </div>
             {/* email */}
-            <div className='flex w-full'>
-              <label htmlFor='email' className='w-1/5'>
-                <Typography variant='h4'>Email</Typography>
+            <div className='flex flex-col md:flex-row w-full'>
+              <label htmlFor='email' className='w-full md:w-1/4 lg:w-1/5'>
+                <Typography className='text-xl lg:text-2xl font-extrabold text-nowrap'>Email</Typography>
               </label>
-              {/* make the input field full width */}
-              <div className='w-4/5'>
+              <div className='w-full md:w-3/4 lg:w-4/5'>
                 <input
-                  // variant='outlined'
-                  // color='white'
                   className='duration-200 disabled:bg-light-background-main disabled:dark:bg-dark-background-third  w-full px-3 py-2 border dark:text-light-text-primary border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
                   type='email'
                   name='email'
@@ -211,11 +207,11 @@ const ProfileContent = () => {
               </div>
             </div>
             {/* phone number and zip code*/}
-            <div className='flex w-full '>
-              <label htmlFor='phoneNumber' className='w-1/5 '>
-                <Typography variant='h4'>Phone </Typography>
+            <div className='flex flex-col md:flex-row w-full '>
+              <label htmlFor='phoneNumber' className='w-full md:w-1/4 lg:w-1/5'>
+                <Typography className='text-xl lg:text-2xl font-extrabold text-nowrap'>Phone </Typography>
               </label>
-              <div className='w-4/5 '>
+              <div className='w-full md:w-3/4 lg:w-4/5 '>
                 <input
                   className='duration-200 disabled:bg-light-background-main disabled:dark:bg-dark-background-third w-full px-3 py-2 border dark:text-light-text-primary border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
                   type='tel'
@@ -230,15 +226,12 @@ const ProfileContent = () => {
               </div>
             </div>
             {/* addresses */}
-            <div className='flex w-full'>
-              <label htmlFor='address1' className='w-1/5'>
-                <Typography variant='h4'>Address 1</Typography>
+            <div className='flex flex-col md:flex-row w-full'>
+              <label htmlFor='address1' className='w-full md:w-1/4 lg:w-1/5'>
+                <Typography className='text-xl lg:text-2xl font-extrabold text-nowrap'>Address 1</Typography>
               </label>
-              {/* make the input field full width */}
-              <div className='w-4/5'>
+              <div className='w-full md:w-3/4 lg:w-4/5'>
                 <input
-                  // variant='outlined'
-                  // color='white'
                   className='duration-200  disabled:bg-light-background-main disabled:dark:bg-dark-background-third w-full px-3 py-2 border dark:text-light-text-primary border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
                   type='text'
                   name='address1'
@@ -251,12 +244,11 @@ const ProfileContent = () => {
                 />
               </div>
             </div>
-            <div className='flex w-full'>
-              <label htmlFor='address2' className='w-1/5'>
-                <Typography variant='h4'>Address 2</Typography>
+            <div className='flex flex-col md:flex-row w-full'>
+              <label htmlFor='address2' className='w-full md:w-1/4 lg:w-1/5'>
+                <Typography className='text-xl lg:text-2xl font-extrabold text-nowrap '>Address 2</Typography>
               </label>
-              {/* make the input field full width */}
-              <div className='w-4/5'>
+              <div className='w-full md:w-3/4 lg:w-4/5'>
                 <input
                   // variant='outlined'
                   // color='white'

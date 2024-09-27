@@ -15,6 +15,8 @@ import NavLinks from './navlinks/NavLinks'
 // import NavLinksCopy from './navlinks/NavLinksCopy'
 import ProfileMenu from './profilemenu/ProfileMenu'
 import CategoriesButton from './categories/CategoriesButton'
+import CartIcon from '../cart/CartIcon'
+import WishlistIcon from '../wishlist/WishlistIcon'
 const NavbarTop = () => {
   const navActive = useSelector(selectNavActive)
   const mobileNav = useSelector(selectMobileNav)
@@ -26,7 +28,6 @@ const NavbarTop = () => {
   })
 
   return (
-    // implemnt profile side bar with navside bar
     <div
       className={`${
         navActive && 'fixed 800px:fixed top-0 left-0   '
@@ -50,16 +51,8 @@ const NavbarTop = () => {
         </div>
         <div className='flex items-center gap-4'>
           <div className='hidden 800px:flex items-center gap-4'>
-            <Badge color='green' content='3'>
-              <Button variant='text' className={`${styles.iconButton}  text-white `} onClick={handleOpenCart}>
-                <ShoppingCartIcon width={35} />
-              </Button>
-            </Badge>
-            <Badge color='green' content='5'>
-              <Button variant='text' className={`${styles.iconButton} text-white `} onClick={handleOpenWishlist}>
-                <HeartIcon width={35} />
-              </Button>
-            </Badge>
+            <CartIcon />
+            <WishlistIcon />
           </div>
           <ProfileMenu />
         </div>

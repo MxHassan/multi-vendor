@@ -15,6 +15,7 @@
 
   ::-webkit-scrollbar {
     width: 10px;
+    height: 12px;
   }
 
   /* Track */
@@ -41,6 +42,7 @@
 @layer utilities {
   .small-scrollbar::-webkit-scrollbar {
     width: 5px;
+    height: 7px;
   }
   .preview-scrollbar::-webkit-scrollbar-track {
     margin-top: 30px;
