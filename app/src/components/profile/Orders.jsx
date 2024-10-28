@@ -87,7 +87,7 @@ const Orders = () => {
     content = (
       <div className={`flex justify-center w-full `}>
         <div className='items-center flex flex-col gap-2 justify-center w-full'>
-          <div className='relative bg-light-background-main dark:bg-dark-background-secondary p-4 rounded-lg w-5/6 mx-auto'>
+          <div className='relative bg-light-background-main dark:bg-dark-background-secondary py-3 sm:py-6 px-4 sm:px-8 rounded-lg w-full 1000px:w-11/12  mx-0 1000px:mx-auto'>
             {/* <OrdersTableMui rows={rows} /> */}
             <OrdersTable rows={rows} />
           </div>

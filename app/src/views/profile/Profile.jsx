@@ -50,12 +50,12 @@ const Profile = () => {
 
   if (isSuccess) {
     content = (
-      <div className={`${styles.section} gap-10 flex py-10  sm:h-screen 800px:h-[calc(100vh-160px)]`}>
+      <div className={`${styles.section} gap-10 flex py-10 min-h-screen  800px:min-h-[calc(100vh-160px)]`}>
         <div className='mt-[70px] 800px:mt-0 hidden lg:flex'>
           <ProfileSideBar />
         </div>
-        <div className='w-11/12 mx-auto mt-[70px] 800px:mt-0 bg-light-background-paper dark:bg-dark-background-paper py-8 px-4 rounded-lg   '>
-          <div className='sm:w-11/12 mx-auto h-full md:w-full  shadow-lg p-6 rounded-lg  bg-light-background-secondary dark:bg-dark-background-main '>
+        <div className='w-11/12  mx-auto mt-[70px] 800px:mt-0 bg-light-background-paper dark:bg-dark-background-paper py-4 sm:py-8 px-2 sm:px-4 rounded-lg   '>
+          <div className='sm:w-11/12 mx-auto 800px:flex   h-full md:w-full  shadow-lg p-2 sm:p-6 rounded-lg  bg-light-background-secondary dark:bg-dark-background-main '>
             <Outlet />
           </div>
         </div>

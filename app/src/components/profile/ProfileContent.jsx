@@ -58,9 +58,9 @@ const ProfileContent = () => {
   let content
 
   content = (
-    <div className={`flex justify-center w-full  `}>
+    <div className={`flex justify-center w-full mt-5  `}>
       <div className='items-center flex flex-col gap-2 justify-center'>
-        <div className='relative bg-light-background-main dark:bg-dark-background-secondary p-4  rounded-lg'>
+        <div className='relative bg-light-background-main dark:bg-dark-background-secondary p-2 sm:p-4  rounded-lg'>
           <Card
             className=' rounded-full bg-transparent cursor-pointer overflow-hidden transition-opacity hover:opacity-90'
             onClick={() => setOpen(true)}

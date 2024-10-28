@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectOpenCart, setCloseCart } from '../../features/nav/navSlice'
 import { MinusIcon, PlusIcon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const CartSingle = ({ cartItem }) => {
   const [count, setCount] = useState(1)
@@ -61,6 +62,7 @@ const CartSingle = ({ cartItem }) => {
 }
 
 const Cart = () => {
+  const navigate = useNavigate()
   const openCart = useSelector(selectOpenCart)
   const dispatch = useDispatch()
   const handleCloseCart = () => dispatch(setCloseCart())
@@ -188,7 +190,16 @@ const Cart = () => {
             </div>
           </div>
 
-          <Button fullWidth variant='gradient' color='red' className='capitalize mt-10 text-base '>
+          <Button
+            onClick={() => {
+              handleCloseCart()
+              navigate('/checkout')
+            }}
+            fullWidth
+            variant='gradient'
+            color='red'
+            className='capitalize mt-10 text-base '
+          >
             Check out
           </Button>
         </div>

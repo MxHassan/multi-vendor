@@ -4,7 +4,7 @@ import Navbar from '../components/navbar/Navbar'
 
 import { selectNavActive } from '../features/nav/navSlice'
 import { useSelector } from 'react-redux'
-
+ 
 const MainLayout = () => {
   const navActive = useSelector(selectNavActive)
   return (

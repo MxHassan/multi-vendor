@@ -1,7 +1,7 @@
 import CategoriesSection from '../catagoriessection/CategoriesSection'
 import Branding from '../catagoriessection/branding/Branding'
 import CarouselWithActions from './carousel/CarouselWithActions'
-
+ 
 const Hero = () => {
   return (
     <>

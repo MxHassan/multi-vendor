@@ -7,6 +7,7 @@ import {
   ActivationPage,
   ActivationPromptPage,
   BestSellingPage,
+  CheckoutPage,
   // ChangePasswordPage,
   ErrorPage,
   EventsPage,
@@ -58,6 +59,9 @@ const router = createBrowserRouter(
           <Route path='product/:productName' element={<LazyLoadPage component={<ProductDetailsPage />} />} />
           <Route path='events' element={<LazyLoadPage component={<EventsPage />} />} />
           <Route path='faq' element={<LazyLoadPage component={<FaqPage />} />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path='checkout' element={<LazyLoadPage component={<CheckoutPage />} />} />
+          </Route>
           <Route element={<ProtectedRoutes />}>
             <Route path='profile' element={<LazyLoadPage component={<ProfilePage />} />}>
               <Route index element={<LazyLoadPage component={<ProfileContentPage />} />} />

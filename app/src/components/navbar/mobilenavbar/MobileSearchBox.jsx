@@ -86,14 +86,14 @@ const MobileSearchBox = ({ handleOpen }) => {
                   to={`/product/${Product_name}`}
                 >
                   <ListItem
-                    className='p-0 hover:scale-[1.05] flex flex-col hover:text-inherit  bg-light-background-secondary dark:bg-dark-background-secondary duration-300'
+                    className='p-0 hover:scale-[1.05] flex  hover:text-inherit  bg-light-background-secondary dark:bg-dark-background-secondary duration-300'
                     key={index}
                     id={i.id}
                   >
-                    <ListItemPrefix className='w-24 shrink-0 rounded-lg '>
+                    <ListItemPrefix className='w-14 shrink-0 rounded-lg '>
                       <img src={i.image_Url[0].url} alt='' className='w-full h-full object-cover rounded-lg ' />
                     </ListItemPrefix>
-                    <p className='text-base'>{i.name}</p>
+                    <p className='text-sm font-normal'>{i.name}</p>
                   </ListItem>
                 </Button>
               )

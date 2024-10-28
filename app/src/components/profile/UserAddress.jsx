@@ -32,14 +32,15 @@ const UserAddress = () => {
     content = (
       <div className={`flex justify-center w-full `}>
         <div className='items-center w-full flex flex-col gap-2 justify-center'>
-          <div className='flex flex-col w-full relative duration-200 bg-light-background-main dark:bg-dark-background-secondary py-6 px-12 rounded-lg'>
-            <div className='flex w-full items-center duration-200 '>
-              <Typography variant='h2'>My Addresses</Typography>
-              <Button variant='filled' color='blue' className='ml-auto text-nowrap h-12'>
+          <div className='flex flex-col w-full relative duration-200 bg-light-background-main dark:bg-dark-background-secondary py-3 sm:py-6 px-4 sm:px-8 rounded-lg'>
+            <div className='flex w-full items-center flex-col sm:flex-row gap-2 sm:gap-0 '>
+              <Typography variant='h2' className='mt-2 sm:mt-0 text-nowrap sm:text-wrap text-3xl  sm:text-4xl'>
+                My Addresses
+              </Typography>
+              <Button variant='filled' color='blue' className='sm:ml-auto text-nowrap h-12'>
                 Add New
               </Button>
             </div>
-            {/* <br /> */}
 
             <div className=' mt-6   flex w-full items-center gap-2 '>
               <Button
@@ -50,7 +51,7 @@ const UserAddress = () => {
                   navigate(`/profile/user-address/1`)
                 }}
               >
-                <div className='rounded-lg  flex items-center justify-between p-4 dark:bg-dark-background-third bg-light-background-secondary'>
+                <div className='rounded-lg  flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-between p-4 dark:bg-dark-background-third bg-light-background-secondary'>
                   <Typography variant='lead' className='font-medium'>
                     Home
                   </Typography>
@@ -79,7 +80,7 @@ const UserAddress = () => {
                   navigate(`/profile/user-address/1`)
                 }}
               >
-                <div className='rounded-lg  flex items-center justify-between p-4 dark:bg-dark-background-third bg-light-background-secondary'>
+                <div className='rounded-lg  flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-between p-4 dark:bg-dark-background-third bg-light-background-secondary'>
                   <Typography variant='lead' className='font-medium'>
                     Work
                   </Typography>
@@ -108,7 +109,7 @@ const UserAddress = () => {
                   navigate(`/profile/user-address/1`)
                 }}
               >
-                <div className='rounded-lg  flex items-center justify-between p-4 dark:bg-dark-background-third bg-light-background-secondary'>
+                <div className='rounded-lg  flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-between p-4 dark:bg-dark-background-third bg-light-background-secondary'>
                   <Typography variant='lead' className='font-medium'>
                     Village
                   </Typography>

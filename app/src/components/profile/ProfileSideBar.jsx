@@ -6,7 +6,7 @@ const ProfileSideBar = ({ closeDrawer, mobileNav }) => {
   const navigate = useNavigate()
   return (
     <div
-      className={`   w-full justify-center  items-center bg-light-background-paper dark:bg-dark-background-paper rounded-xl py-8 `}
+      className={`   w-full justify-center items-center bg-light-background-paper dark:bg-dark-background-paper rounded-xl py-8 `}
     >
       <Tabs
         orientation='vertical'
@@ -19,7 +19,7 @@ const ProfileSideBar = ({ closeDrawer, mobileNav }) => {
             indicatorProps={{
               className: ` bg-light-warning-light dark:bg-dark-warning-main  `
             }}
-            className='  px-4 bg-opacity-100 flex z-0 w-full  bg-light-background-secondary dark:bg-dark-background-main mx-auto text-nowrap  '
+            className='  px-4 bg-opacity-100 flex z-0 w-full   bg-light-background-secondary dark:bg-dark-background-main mx-auto text-nowrap  '
           >
             {profileItems.map((navItem, index) => (
               <Tab

@@ -40,6 +40,10 @@ export const ProductsPage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'ProductsPage' */ '../views/products/Products')
 )
+export const CheckoutPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'CheckoutPage' */ '../views/checkout/Checkout')
+)
 export const ProfilePage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'ProfilePage' */ '../views/profile/Profile')
