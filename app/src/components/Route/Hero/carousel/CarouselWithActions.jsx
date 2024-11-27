@@ -12,9 +12,7 @@ const CarouselWithActions = () => {
       autoplay={true}
       autoplayDelay={10 * 1000}
       loop={true}
-      className={`rounded-b-lg h-[calc(100vh-20px)] 800px:h-[calc(100vh-160px)] bg-no-repeat   ${
-        navActive && '800px:mt-[70px] mt-0 '
-      } `}
+      className={`rounded-b-lg h-[calc(100vh-20px)] 800px:h-[calc(100vh-160px)] bg-no-repeat   `}
       navigation={({ setActiveIndex, activeIndex, length }) => (
         <div className='absolute bottom-4 left-2/4 z-[8] flex -translate-x-2/4 gap-2'>
           {new Array(length).fill('').map((_, i) => (

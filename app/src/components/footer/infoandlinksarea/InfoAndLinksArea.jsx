@@ -9,7 +9,7 @@ const InfoAndLinksArea = () => {
         <img
           src='https://cdn.pixabay.com/photo/2021/08/10/16/02/amazon-6536326_1280.png'
           alt=''
-          className='dark:invert-[1] brightness-0  opacity-80 dark:opacity-90'
+          className='dark:invert-[1] brightness-0 w-[200px] mx-auto opacity-80 dark:opacity-90'
         />
         <br />
         <p>The home and elements needeed to create beatiful products.</p>

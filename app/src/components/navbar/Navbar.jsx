@@ -31,7 +31,7 @@ const NavbarTop = () => {
     <div
       className={`${
         navActive && 'fixed 800px:fixed top-0 left-0   '
-      } duration-300 p-0 fixed 800px:static flex z-10 h-[70px] w-full dark:bg-blue-900 bg-amber-500`}
+      } duration-300 p-0  flex z-10 h-[70px] w-full dark:bg-blue-900 bg-amber-500`}
     >
       <div className={` w-full px-4 flex items-center justify-between`}>
         <IconButton

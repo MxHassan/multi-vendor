@@ -42,14 +42,16 @@ const MinimalLayout = () => {
   //   }
   // }, [isLoading])
   return (
-    <div className='h-screen'>
+    <>
       <SearchBar />
-      <Outlet />
+      <div className='min-h-[calc(100vh-90px)] justify-center flex flex-col'>
+        <Outlet />
+      </div>
       <Footer />
       <Cart />
       <WishList />
       <MobileNavbar />
-    </div>
+    </>
   )
 }
 

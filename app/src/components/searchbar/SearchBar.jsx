@@ -33,7 +33,7 @@ const SearchBar = () => {
           >
             <Switcher />
           </IconButton>
-          <Link to='/seller'>
+          <Link to='/shop'>
             <Button
               color='blue'
               className={`capitalize flex items-center text-md text-base font-Poppins font-normal px-4 ml-2  } `}

@@ -4,7 +4,7 @@ import { useState } from 'react'
 const NewsLetterArea = () => {
   const [email, setEmail] = useState('')
   return (
-    <div className='bg-indigo-600 text-light-text-primary dark:text-dark-text-primary md:flex  py-7 px-4 sm:px-12 md:items-center '>
+    <div className='bg-indigo-600 text-light-text-primary dark:text-dark-text-primary md:flex rounded-xl  py-7 px-4 sm:px-12 md:items-center '>
       <h1 className='lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold md:w-2/5'>
         <span className='text-[#56d879]'>Subscribe</span> to get news events and offers!
       </h1>

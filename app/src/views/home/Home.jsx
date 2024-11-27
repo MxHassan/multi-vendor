@@ -11,7 +11,7 @@ const Home = () => {
   // if (isError) toast.error(error.data.message)
   // const navigate = useNavigate()
   return (
-    <div className='pt-[30px] 800px:pt-0'>
+    <div className=''>
       <Hero />
       <BestDeals />
       <EventsSection />

@@ -1,6 +1,4 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import MinimalLayout from '../layout/MinimalLayout'
-import MainLayout from '../layout/MainLayout'
 import ProtectedRoutes from './ProtectedRoutes.jsx'
 import LazyLoadPage from '../components/lazyload-page/LazyLoadPage.jsx'
 import {
@@ -25,17 +23,14 @@ import {
   ProfilePage,
   PublicPage,
   RefundPage,
+  ShopLoginPage,
+  ShopPublicPage,
+  ShopSignupPage,
   SignUpPage,
   TrackOrderPage,
   UserAddressPage
 } from './lazyComponents.jsx'
-import { ErrorBoundary } from 'react-error-boundary'
 import PublicRoutes from './PublicRoutes.jsx'
-// import ProfileContent from '../components/profile/ProfileContent.jsx'
-// import CategoriesSection from '../components/Route/catagoriessection/CategoriesSection.jsx'
-// import Categories from '../views/categories/Categories.jsx'
-// import ProtectedRoutes from './ProtectedRoutes.jsx'
-// const LazyHome = lazy(() => import('../views/home/Home'))
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,6 +47,11 @@ const router = createBrowserRouter(
           <Route path='activation/prompt' element={<LazyLoadPage component={<ActivationPromptPage />} />} />
           <Route path='activation/:activationToken' element={<LazyLoadPage component={<ActivationPage />} />} />
         </Route>
+        <Route path='shop'>
+          <Route index element={<LazyLoadPage component={<ShopPublicPage />} />} />
+          <Route path='signup' element={<LazyLoadPage component={<ShopSignupPage />} />} />
+          <Route path='login' element={<LazyLoadPage component={<ShopLoginPage />} />} />
+        </Route>
         <Route path='/' element={<LazyLoadPage component={<MainLayoutPage />} />}>
           <Route index element={<LazyLoadPage component={<HomePage />} />} />
           <Route path='best-selling' element={<LazyLoadPage component={<BestSellingPage />} />} />
@@ -59,6 +59,7 @@ const router = createBrowserRouter(
           <Route path='product/:productName' element={<LazyLoadPage component={<ProductDetailsPage />} />} />
           <Route path='events' element={<LazyLoadPage component={<EventsPage />} />} />
           <Route path='faq' element={<LazyLoadPage component={<FaqPage />} />} />
+
           <Route element={<ProtectedRoutes />}>
             <Route path='checkout' element={<LazyLoadPage component={<CheckoutPage />} />} />
           </Route>

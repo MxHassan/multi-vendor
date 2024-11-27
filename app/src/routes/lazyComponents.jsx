@@ -24,6 +24,18 @@ export const LoginPage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'LoginPage' */ '../views/login/Login')
 )
+export const ShopPublicPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'ShopPublicPage' */ '../views/shop-public/ShopPublic')
+)
+export const ShopSignupPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'ShopSignupPage' */ '../views/shop-signup/ShopSignup')
+)
+export const ShopLoginPage = importWithPreload(() =>
+  // webpackChunkName: To give chunk a specific name instead a random generated one
+  import(/* webpackChunkName: 'ShopLoginPage' */ '../views/shop-login/ShopLogin')
+)
 export const EventsPage = importWithPreload(() =>
   // webpackChunkName: To give chunk a specific name instead a random generated one
   import(/* webpackChunkName: 'EventsPage' */ '../views/events/Events')

@@ -7,10 +7,14 @@ import { CloudArrowUpIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Backdrop, Button as MuiButton } from '@mui/material'
 import { useSignUpMutation } from '../../features/auth/authApiSlice'
 import Loader from '../../components/loader/Loader'
-const SignUp = () => {
+const ShopSignup = () => {
   const navigate = useNavigate()
   const [signup, { isLoading, isSuccess }] = useSignUpMutation()
   const [firstName, setFirstName] = useState('')
+  const [shopName, setShopName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [address, setAddress] = useState('')
+  const [zipCode, setZipCode] = useState('')
   const [lastName, setLastName] = useState('')
   const [avatar, setAvatar] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
@@ -31,6 +35,24 @@ const SignUp = () => {
   })
 
   const formInputs = [
+    // {
+    //   id: 'shopName',
+    //   name: 'shopName',
+    //   type: 'text',
+    //   label: 'Shop Name',
+    //   autoComplete: 'text',
+    //   placeholder: '',
+    //   errormessage: 'This shop name cannot be used !'
+    // },
+    // {
+    //   id: 'phoneNumber',
+    //   name: 'phoneNumber',
+    //   type: 'tel',
+    //   label: 'Phone Number',
+    //   autoComplete: 'tel',
+    //   placeholder: '+123456789',
+    //   errormessage: 'It should be a valid phone number !'
+    // },
     {
       id: 'email',
       name: 'email',
@@ -161,14 +183,14 @@ const SignUp = () => {
   }
   return (
     <>
-      <div className='min-w-96 mt-2 flex-col justify-center py-12 sm:px-6 lg:px-8 duration-300 '>
+      <div className='min-w-96 flex-col pb-12 pt-6 justify-center  sm:px-6 lg:px-8 duration-300 '>
         <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-          <h2 className='mt-6 text-center text-3xl font-extrabold '>Sign Up a new account</h2>
+          <h2 className='mt-6 text-center text-3xl font-extrabold '>Sign Up a seller account</h2>
         </div>
         <div className='mt-8 sm:mx-auto max-sm:w-full sm:max-w-lg bg-light-background-secondary dark:bg-dark-background-secondary rounded-lg'>
           <div className=' p-8 shadow sm:rounded-lg sm:px-10  '>
             <form noValidate onSubmit={handleSubmit} className='space-y-6'>
-              <div className='flex justify-between '>
+              {/* <div className='flex justify-between '>
                 <div className=' mr-2'>
                   <label htmlFor='firstName' className='block text-sm font-medium '>
                     First Name
@@ -219,6 +241,62 @@ const SignUp = () => {
                     />
                   </div>
                 </div>
+              </div> */}
+              <div>
+                <label htmlFor='shopName' className='block text-sm font-medium '>
+                  Shop Name
+                </label>
+                <div className='mt-1'>
+                  <Input
+                    placeholder=''
+                    size='lg'
+                    type='text'
+                    name='shopName'
+                    id='shopName'
+                    value={shopName}
+                    onChange={(e) => setShopName(e.target.value)}
+                    autoComplete='organization'
+                    // error={errors[input.name]}
+                    className=' !border-light-text-secondary text-inherit duration-0 focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main  dark:bg-dark-background-main rounded-lg'
+                    }}
+                  />
+                  {/* {errors[input.name] && (
+                      <p className='p-1 animate-fade-in mt-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>
+                    )} */}
+                </div>
+              </div>
+              <div>
+                <label htmlFor='phoneNumber' className='block text-sm font-medium '>
+                  Phone Number
+                </label>
+                <div className='mt-1'>
+                  <Input
+                    placeholder='+123456789'
+                    size='lg'
+                    type='tel'
+                    name='phoneNumber'
+                    id='phoneNumber'
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    autoComplete='tel-country-code'
+                    // error={errors[input.name]}
+                    className=' !border-light-text-secondary text-inherit duration-0 focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main  dark:bg-dark-background-main rounded-lg'
+                    }}
+                  />
+                  {/* {errors[input.name] && (
+                      <p className='p-1 animate-fade-in mt-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>
+                    )} */}
+                </div>
               </div>
               {formInputs.map((input) => (
                 <div key={input.id}>
@@ -254,6 +332,65 @@ const SignUp = () => {
               {matchError && (
                 <p className='p-1 text-xs animate-fade-in text-red-700 opacity-75'>Passwords Don&apos;t match</p>
               )}
+              <div>
+                <label htmlFor='address' className='block text-sm font-medium '>
+                  Address
+                </label>
+                <div className='mt-1'>
+                  <Input
+                    placeholder='Address'
+                    size='lg'
+                    type='text'
+                    name='address'
+                    id='address'
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    autoComplete='address-level1'
+                    // error={errors[input.name]}
+                    className=' !border-light-text-secondary text-inherit duration-0 focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main  dark:bg-dark-background-main rounded-lg'
+                    }}
+                  />
+                  {/* {errors[input.name] && (
+                      <p className='p-1 animate-fade-in mt-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>
+                    )} */}
+                </div>
+              </div>
+              <div>
+                <label htmlFor='zipCode' className='block text-sm font-medium '>
+                  Zip Code
+                </label>
+                <div className='mt-1'>
+                  <Input
+                    placeholder='Zip Code'
+                    size='lg'
+                    type='text'
+                    name='zipCode'
+                    id='zipCode'
+                    value={zipCode}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '')
+                      setZipCode(value)
+                    }}
+                    autoComplete='organization'
+                    // error={errors[input.name]}
+                    className=' !border-light-text-secondary text-inherit duration-0 focus:!border-light-text-primary dark:!border-dark-text-secondary dark:focus:!border-dark-text-primary '
+                    labelProps={{
+                      className: 'hidden'
+                    }}
+                    containerProps={{
+                      className: 'bg-light-background-main  dark:bg-dark-background-main rounded-lg'
+                    }}
+                  />
+                  {/* {errors[input.name] && (
+                      <p className='p-1 animate-fade-in mt-1 text-xs text-red-700 opacity-75'>{input.errormessage}</p>
+                    )} */}
+                </div>
+              </div>
               <Checkbox
                 color='indigo'
                 value={showPassword}
@@ -311,8 +448,8 @@ const SignUp = () => {
               </div>
               <div>
                 Already have an account?{' '}
-                <Link to='/login' className='duration-100 font-medium text-blue-600 hover:text-blue-500'>
-                  Login
+                <Link to='/shop/login' className='duration-100 font-medium text-blue-600 hover:text-blue-500'>
+                  Login as a Seller
                 </Link>
               </div>
             </form>
@@ -328,4 +465,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default ShopSignup

@@ -4,13 +4,13 @@ import Navbar from '../components/navbar/Navbar'
 
 import { selectNavActive } from '../features/nav/navSlice'
 import { useSelector } from 'react-redux'
- 
+
 const MainLayout = () => {
   const navActive = useSelector(selectNavActive)
   return (
     <>
       <Navbar />
-      <div className={`${navActive && '800px:mt-[70px] '} `}>
+      <div className={`${navActive && '  mt-[70px] '} pt-[20px] 800px:pt-0`}>
         <Outlet />
       </div>
     </>
